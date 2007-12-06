@@ -108,10 +108,10 @@ int AddTemplate::objCnt = 0;
 class SubTemplate : public ProblemTemplate
 {
 	protected:
-		static int objCnt;
 		int minuend;
 		int subtrahend;
 		int difference;
+		static int objCnt;
 	public:
 		SubTemplate()
 		{
@@ -127,16 +127,44 @@ class SubTemplate : public ProblemTemplate
 			subtrahend = s;
 			difference = minuend - subtrahend;
 		}
+		int getMinuend()
+		{
+			return minuend;
+		}
+		int getSubtrahend()
+		{
+			return subtrahend;
+		}
+		int getDifference()
+		{
+			return difference;
+		}
+		int getObjCnt()
+		{
+			return objCnt;
+		}
+		void setMinuend(int m)
+		{
+			minuend = m;
+		}
+		void setSubtrahend(int s)
+		{
+			subtrahend = s;
+		}
+		void setDifference(int d)
+		{
+			difference = d;
+		}
 };
 int SubTemplate::objCnt = 0;
 
 class MltTemplate : public ProblemTemplate
 {
 	protected:
-		static int objCnt;
 		int firstFactor;
 		int secondFactor;
 		int product;
+		static int objCnt;
 	public:
 		MltTemplate()
 		{
@@ -151,6 +179,34 @@ class MltTemplate : public ProblemTemplate
 			firstFactor = ff;
 			secondFactor = sf;
 			product = firstFactor * secondFactor;
+		}
+		int getFirstFactor()
+		{
+			return firstFactor;
+		}
+		int getSecondFactor()
+		{
+			return secondFactor;
+		}
+		int getProduct()
+		{
+			return product;
+		}
+		int getObjCnt()
+		{
+			return objCnt;
+		}
+		void setFirstFactor(int ff)
+		{
+			firstFactor = ff;
+		}
+		void setSecondFactor(int sf)
+		{
+			secondFactor = sf;
+		}
+		void setProduct(int p)
+		{
+			product = p;
 		}
 };
 int MltTemplate::objCnt = 0;
@@ -186,9 +242,13 @@ class Student
 	protected:
 		string name;
 		int addLevel;
+		int prevAddLevel;
 		int subLevel;
+		int prevSubLevel;
 		int mltLevel;
+		int prevMltLevel;
 		int divLevel;
+		int prevDivLevel;
 		int addSpeed;
 		int subSpeed;
 		int mltSpeed;
@@ -200,22 +260,29 @@ class Student
 	public:
 		Student()
 		{
-			name = "Harry";
-			addLevel = 11;
+			name = "Vincent";
+			addLevel = 2;
+			prevAddLevel = 0;
 			subLevel = 4;
+			prevAddLevel = 0;
 			mltLevel = 2;
+			prevAddLevel = 0;
 			divLevel = 4;
+			prevDivLevel = 0;
 			addSpeed = 6;
 			subSpeed = 6;
 			mltSpeed = 6;
 			divSpeed = 6;
 		}
-		Student(string ns, int al, int sl, int ml, int dl, int as, int ss, int ms, int ds)
+		Student(string ns, int al = 2, int sl = 4, int ml = 2, int dl = 4, int as = 6, int ss = 6, int ms = 6, int ds = 6)
 		{
 			name = ns;
 			addLevel = al;
+			prevAddLevel = 0;
 			subLevel = sl;
+			prevSubLevel = 0;
 			mltLevel = ml;
+			prevMltLevel = 0;
 			divLevel = dl;
 			addSpeed = as;
 			subSpeed = ss;
@@ -309,14 +376,24 @@ class Student
 		{
 			divSpeed = ds;
 		}
-		void makeAddTemplateArr()
+		void makeAddTemplateArr(Student & s)
 		{
 			int numUniqueProblems = (MAX_ADDEND + 1) * (MAX_ADDEND + 1);
 			addTemplateArr = new AddTemplate[numUniqueProblems];
 			int ndx = 0;
-			for(int fa=0;fa<=addLevel;fa++)
+			for(int l=0; l<=MAX_ADDEND;l++)
 			{
-				for(int sa=0;sa<=addLevel;sa++)
+				int fa = l;
+				for(int sa=0;sa<=l;sa++)
+				{
+					int s = fa + sa;
+					addTemplateArr[ndx].setFirstAddend(fa);
+					addTemplateArr[ndx].setSecondAddend(sa);
+					addTemplateArr[ndx].setSum(s);
+					ndx++;
+				}
+				int sa = l;
+				for(int fa=0;fa<l;fa++)
 				{
 					int s = fa + sa;
 					addTemplateArr[ndx].setFirstAddend(fa);
@@ -326,22 +403,72 @@ class Student
 				}
 			}
 		}
-		void addModule(Student & s)
+		void makeSubTemplateArr(Student & s)
 		{
-			//add(s);
+			int numUniqueProblems = (((MAX_MINUEND + 1) * (MAX_MINUEND + 1)) / 2) + (MAX_MINUEND / 2) + 1;
+			subTemplateArr = new SubTemplate[numUniqueProblems];
+			int ndx = 0;
+			for(int l=0; l<=MAX_MINUEND;l++)
+			{
+				int m = l;
+				for(int s=0;s<=m;s++)
+				{
+					int d = m - s;
+					subTemplateArr[ndx].setMinuend(m);
+					subTemplateArr[ndx].setSubtrahend(s);
+					subTemplateArr[ndx].setDifference(d);
+					ndx++;
+				}
+			}
 		}
-		void subModule(Student & s)
+		void makeMltTemplateArr(Student & s)
 		{
+			int numUniqueProblems = (MAX_FACTOR + 1) * (MAX_FACTOR + 1);
+			mltTemplateArr = new MltTemplate[numUniqueProblems];
+			int ndx = 0;
+			for(int l=0; l<=MAX_FACTOR;l++)
+			{
+				int ff = l;
+				for(int sf=0;sf<=l;sf++)
+				{
+					int p = ff + sf;
+					mltTemplateArr[ndx].setFirstFactor(ff);
+					mltTemplateArr[ndx].setSecondFactor(sf);
+					mltTemplateArr[ndx].setProduct(p);
+					ndx++;
+				}
+				int sf = l;
+				for(int ff=0;ff<l;ff++)
+				{
+					int p = ff + sf;
+					mltTemplateArr[ndx].setFirstFactor(ff);
+					mltTemplateArr[ndx].setSecondFactor(sf);
+					mltTemplateArr[ndx].setProduct(p);
+					ndx++;
+				}
+			}
 		}
-		void mltModule(Student & s)
-		{
-		}
-		void divModule(Student & s)
-		{
-		}
-		void writeStudent(Student & s)
-		{
-		}
+		//--------------------------------------------------
+		// void addModule(Student & s)
+		// {
+		// 	//add(s);
+		// }
+		// void subModule(Student & s)
+		// {
+		// 	//sub(s);
+		// }
+		// void mltModule(Student & s)
+		// {
+		// 	//mlt(s);
+		// }
+		// void divModule(Student & s)
+		// {
+		// 	//div(s);
+		// }
+		// void writeStudent(Student & s)
+		// {
+		// }
+		//-------------------------------------------------- 
 };
 
 
