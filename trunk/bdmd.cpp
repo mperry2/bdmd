@@ -148,7 +148,15 @@ int main()
 		// one and add some cout statements to this file see how your module
 		// is working.  I should have the code neede to make divModule(s) 
 		// functional soon.
-		// 
+		//
+		// While you are working on your modules, I will work the user interface
+		// for the main module and on saving and retreiving the Student objects. 
+		// I will need your modules, completed to specifications, together with 
+		// your documentation as specified in the proposal, by Monday at noon, 
+		// in order to integrate, test, confer with you about any problems, and 
+		// be ready to demonstrate and turn in the project by Thursday.
+		//
+		// Whew!
 
 	}
 	return 0;
