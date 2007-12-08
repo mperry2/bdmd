@@ -107,7 +107,7 @@ class AddTemplate : public ProblemTemplate
 			sum = s;
 		}
 };
-int AddTemplate::objCnt = 0;
+//int AddTemplate::objCnt = 0;
 
 class SubTemplate : public ProblemTemplate
 {
@@ -160,7 +160,7 @@ class SubTemplate : public ProblemTemplate
 			difference = d;
 		}
 };
-int SubTemplate::objCnt = 0;
+//int SubTemplate::objCnt = 0;
 
 class MltTemplate : public ProblemTemplate
 {
@@ -213,7 +213,7 @@ class MltTemplate : public ProblemTemplate
 			product = p;
 		}
 };
-int MltTemplate::objCnt = 0;
+//int MltTemplate::objCnt = 0;
 		
 class DivTemplate : public ProblemTemplate
 {
@@ -239,7 +239,7 @@ class DivTemplate : public ProblemTemplate
 			quotient = numerator / denominator;
 		}
 };
-int DivTemplate::objCnt = 0;
+//int DivTemplate::objCnt = 0;
 
 class Student
 {

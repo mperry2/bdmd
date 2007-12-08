@@ -32,6 +32,9 @@ void printAddTemplateArr(Student & s);
 void printSubTemplateArr(Student & s);
 void printMltTemplateArr(Student & s);
 void writeUserDat(fstream & userdatFob);
+void addModule(Student & s);
+void subModule(Student & s);
+void mltModule(Student & s);
 
 int main()
 {
@@ -82,16 +85,16 @@ int main()
 	// 
 	// Function prototype and call to addition module:
 	// void addModule(Student & s);
-	// addModule(s);
-	// 
+	addModule(s);
+
 	// Function prototype and call to subtraction module:
 	// void subModule(Student & s);
-	// subModule(s);
-	//
+	subModule(s);
+	
 	// Function prototype and call to multiplication module:
 	// void mltModule(Student & s);
-	// mltModule(s);
-	//
+	mltModule(s);
+
 	// Function prototype and call to division module:
 	// void divModule(Student & s);
 	// divModule(s);
