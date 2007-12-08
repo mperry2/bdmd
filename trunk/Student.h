@@ -19,6 +19,7 @@
 #define STUDENT_H
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 
 class Student;
@@ -27,6 +28,8 @@ class AddTemplate;
 class SubTemplate;
 class MltTemplate;
 class DivTemplate;
+
+void writeUserDat(fstream & userdatFob);
 
 const int MAX_ADDEND = 100;
 const int MAX_MINUEND = 100;
@@ -264,9 +267,9 @@ class Student
 			addLevel = 2;
 			prevAddLevel = 0;
 			subLevel = 4;
-			prevAddLevel = 0;
+			prevSubLevel = 0;
 			mltLevel = 2;
-			prevAddLevel = 0;
+			prevMltLevel = 0;
 			divLevel = 4;
 			prevDivLevel = 0;
 			addSpeed = 6;
@@ -284,6 +287,7 @@ class Student
 			mltLevel = ml;
 			prevMltLevel = 0;
 			divLevel = dl;
+			prevDivLevel = 0;
 			addSpeed = as;
 			subSpeed = ss;
 			mltSpeed = ms;
@@ -448,29 +452,48 @@ class Student
 				}
 			}
 		}
-		//--------------------------------------------------
-		// void addModule(Student & s)
-		// {
-		// 	//add(s);
-		// }
-		// void subModule(Student & s)
-		// {
-		// 	//sub(s);
-		// }
-		// void mltModule(Student & s)
-		// {
-		// 	//mlt(s);
-		// }
-		// void divModule(Student & s)
-		// {
-		// 	//div(s);
-		// }
-		// void writeStudent(Student & s)
-		// {
-		// }
-		//-------------------------------------------------- 
+		void writeUserDat(fstream & userdatFob)
+		{
+			userdatFob.open("vincent.dat", ios::out);
+			userdatFob << name << '~'
+				<< addLevel << '~'
+				<< prevAddLevel << '~'
+				<< subLevel << '~'
+				<< prevSubLevel << '~'
+				<< mltLevel << '~'
+				<< prevMltLevel << '~'
+				<< divLevel << '~'
+				<< prevDivLevel << '~'
+				<< addSpeed << '~'
+				<< subSpeed << '~'
+				<< mltSpeed << '~'
+				<< divSpeed << '~';
+			for(int i=0;i<addTemplateArr[0].getObjCnt();i++)
+			{
+				userdatFob << addTemplateArr[i].getFrequency() << '~'
+					<< addTemplateArr[i].getFirstAddend() << '~'
+					<< addTemplateArr[i].getSecondAddend() << '~'
+					<< addTemplateArr[i].getSum() << '~'
+					<< addTemplateArr[i].getObjCnt() << '~';
+			}
+			for(int i=0;i<subTemplateArr[0].getObjCnt();i++)
+			{
+				userdatFob << subTemplateArr[i].getFrequency() << '~'
+					<< subTemplateArr[i].getMinuend() << '~'
+					<< subTemplateArr[i].getSubtrahend() << '~'
+					<< subTemplateArr[i].getDifference() << '~'
+					<< subTemplateArr[i].getObjCnt() << '~';
+			}
+			for(int i=0;i<mltTemplateArr[0].getObjCnt();i++)
+			{
+				userdatFob << mltTemplateArr[i].getFrequency() << '~'
+					<< mltTemplateArr[i].getFirstFactor() << '~'
+					<< mltTemplateArr[i].getSecondFactor() << '~'
+					<< mltTemplateArr[i].getProduct() << '~'
+					<< mltTemplateArr[i].getObjCnt() << '~';
+			}
+		}
 };
-
 
 #endif
 

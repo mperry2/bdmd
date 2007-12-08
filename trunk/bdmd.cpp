@@ -23,15 +23,20 @@
 // 		have any questions, please call, write, or 
 // 		talk to me tonight at class.
 
+#include <fstream>
 #include "Student.h"
+
 using namespace std;
 
 void printAddTemplateArr(Student & s);
 void printSubTemplateArr(Student & s);
 void printMltTemplateArr(Student & s);
+void writeUserDat(fstream & userdatFob);
 
 int main()
 {
+	fstream userdatFob;
+
 	// test data members of Student.h class
 	Student s;
 	cout << endl
@@ -44,121 +49,121 @@ int main()
 		<< "s.subSpeed: " << s.getSubSpeed() << endl
 		<< "s.mltSpeed: " << s.getMltSpeed() << endl
 		<< "s.divSpeed: " << s.getDivSpeed() << endl;
-	while(1)
-	{
-		int level;
-		// test member functions for addition in Student.h
-		s.makeAddTemplateArr(s);
-		cout << endl
-			<< "addLevel: ";
-		cin >> level;
-		s.setAddLevel(level);		
-		printAddTemplateArr(s);
+	int level;
+	// test member functions for addition in Student.h
+	s.makeAddTemplateArr(s);
+	cout << endl
+		<< "addLevel: ";
+	cin >> level;
+	s.setAddLevel(level);		
+	printAddTemplateArr(s);
 
-		// test member functions for subtraction in Student.h
-		s.makeSubTemplateArr(s);
-		cout << endl
-			<< "subLevel: ";
-		cin >> level;
-		s.setSubLevel(level);		
-		printSubTemplateArr(s);
-		
-		// test member functions for multiplication in Student.h
-		s.makeMltTemplateArr(s);
-		cout << endl
-			<< "mltLevel: ";
-		cin >> level;
-		s.setMltLevel(level);		
-		printMltTemplateArr(s);
+	// test member functions for subtraction in Student.h
+	s.makeSubTemplateArr(s);
+	cout << endl
+		<< "subLevel: ";
+	cin >> level;
+	s.setSubLevel(level);		
+	printSubTemplateArr(s);
+	
+	// test member functions for multiplication in Student.h
+	s.makeMltTemplateArr(s);
+	cout << endl
+		<< "mltLevel: ";
+	cin >> level;
+	s.setMltLevel(level);		
+	printMltTemplateArr(s);
 
-		// This is what the prototypes (for your files) of and calls to (from here) your addition,
-		// subtraction, multiplication, and division modules should look like.
-		// 
-		// Function prototype and call to addition module:
-		// void addModule(Student & s);
-		// addModule(s);
-		// 
-		// Function prototype and call to subtraction module:
-		// void subModule(Student & s);
-		// subModule(s);
-		//
-		// Function prototype and call to multiplication module:
-		// void mltModule(Student & s);
-		// mltModule(s);
-		//
-		// Function prototype and call to division module:
-		// void divModule(Student & s);
-		// divModule(s);
-		//
-		// The source code for each module should implement the corresponding function,
-		// which uses the classes defined and implemented in Student.h.
-		// Your module should use the data and members of the Student object 
-		// that is passed to it to do its work, and use the mutator functions 
-		// in it and its members to changes such things 
-		// as the maximum size of the problems the student is doing, the amount of time 
-		// allowed for each problem, and so on.  Please read the specifications 
-		// for the program in bdmd.txt carefully so we will all be following the 
-		// same design.
-		//
-		// In particular, note that the Student object that is passed to your module 
-		// has arrays of problem templates called addTemplateArr, subTemplateArr, 
-		// mltTemplateArr, and divTemplateArr.  These arrays contain AddTemplate, 
-		// SubTemplate, MltTemplate, and DivTemplate objects which represent one example of
-		// each possible problem at a given level.  The problem templates are arranged 
-		// in the array in order such that to get all the problems in which the addends 
-		// (or factors, or the minuend, or the numerator, depending on the type of problem)
-		// are from 0 to a given level, you can take the first numUsed items in the 
-		// array.  numUsed for each level (defined in terms of 
-		// maximum addend, factor, minuend, or numerator,
-		// depending on the type of problem) can be calculated in accordance with 
-		// the functions below (such as printAddTemplateArr(Student & s)) that 
-		// print the set of problem templates for any given level.  You can see 
-		// how this works by compiling, linking, and running this file
-		// without changes.  You can input levels for addition, subtraction, and 
-		// multiplication problems, and see how the right templates are retreived 
-		// from the problem template arrays.
-		//
-		// The problem template arrays should be used by your module each time
-		// you generate a problem set for the student.  Note that each problem
-		// template in the array (each of which is an instantiation 
-		// of AddTemplate, SubTemplate, MltTemplate, or DivTemplate, depending 
-		// on the array) has a frequency data member.  First, you can 
-		// use the problem array to generate a bag of problems that contains
-		// the right number of copies of each of the eligible problems for that level.
-		// The right number of copies depends on the frequency attribute of the 
-		// problem template.
-		//
-		// For example, for an addition problem, the right number of copies of the 
-		// first problem template in the array is
-		// is s.addTemplateArr[0].frequency.  Because these attributes are 
-		// protected, you have to use the get methods of the AddTemplate 
-		// class: s.getAddTemplateArr()[0].getFrequency().
-		// Then, you randomly draw 50 questions from the bag, which are used
-		// as the problem set.  When a problem is answered correctly or incorrectly,
-		// you use the get and set functions of the appropriate problem template class to 
-		// adjust its frequency down or up by an appropriate amount. At the
-		// end of the set, you can use the get and set functions in the 
-		// Student class to adjust the time allowed, the level, or both.
-		// Each time you do a new set, you should generate a new bag with
-		// the adjusted frequencies from which to draw the problem set.
-		//
-		// The addModule(s), subModule(s), and mltModule(s) calls above 
-		// should be fully functional once you have written your module
-		// to specifications.  You should be able to uncomment the appropriate
-		// one and add some cout statements to this file see how your module
-		// is working.  I should have the code neede to make divModule(s) 
-		// functional soon.
-		//
-		// While you are working on your modules, I will work the user interface
-		// for the main module and on saving and retreiving the Student objects. 
-		// I will need your modules, completed to specifications, together with 
-		// your documentation as specified in the proposal, by Monday at noon, 
-		// in order to integrate, test, confer with you about any problems, and 
-		// be ready to demonstrate and turn in the project by Thursday.
-		//
-		// Whew!
+	// test writeUserDat()
+	s.writeUserDat(userdatFob);
 
-	}
+	// This is what the prototypes (for your files) of and calls to (from here) your addition,
+	// subtraction, multiplication, and division modules should look like.
+	// 
+	// Function prototype and call to addition module:
+	// void addModule(Student & s);
+	// addModule(s);
+	// 
+	// Function prototype and call to subtraction module:
+	// void subModule(Student & s);
+	// subModule(s);
+	//
+	// Function prototype and call to multiplication module:
+	// void mltModule(Student & s);
+	// mltModule(s);
+	//
+	// Function prototype and call to division module:
+	// void divModule(Student & s);
+	// divModule(s);
+	//
+	// The source code for each module should implement the corresponding function,
+	// which uses the classes defined and implemented in Student.h.
+	// Your module should use the data and members of the Student object 
+	// that is passed to it to do its work, and use the mutator functions 
+	// in it and its members to changes such things 
+	// as the maximum size of the problems the student is doing, the amount of time 
+	// allowed for each problem, and so on.  Please read the specifications 
+	// for the program in bdmd.txt carefully so we will all be following the 
+	// same designm.
+	//
+	// In particular, note that the Student object that is passed to your module 
+	// has arrays of problem templates called addTemplateArr, subTemplateArr, 
+	// mltTemplateArr, and divTemplateArr.  These arrays contain AddTemplate, 
+	// SubTemplate, MltTemplate, and DivTemplate objects which represent one example of
+	// each possible problem at a given level.  The problem templates are arranged 
+	// in the array in order such that to get all the problems in which the addends 
+	// (or factors, or the minuend, or the numerator, depending on the type of problem)
+	// are from 0 to a given level, you can take the first numUsed items in the 
+	// array.  numUsed for each level (defined in terms of 
+	// maximum addend, factor, minuend, or numerator,
+	// depending on the type of problem) can be calculated in accordance with 
+	// the functions below (such as printAddTemplateArr(Student & s)) that 
+	// print the set of problem templates for any given level.  You can see 
+	// how this works by compiling, linking, and running this file
+	// without changes.  You can input levels for addition, subtraction, and 
+	// multiplication problems, and see how the right templates are retreived 
+	// from the problem template arrays.
+	//
+	// The problem template arrays should be used by your module each time
+	// you generate a problem set for the student.  Note that each problem
+	// template in the array (each of which is an instantiation 
+	// of AddTemplate, SubTemplate, MltTemplate, or DivTemplate, depending 
+	// on the array) has a frequency data member.  First, you can 
+	// use the problem array to generate a bag of problems that contains
+	// the right number of copies of each of the eligible problems for that level.
+	// The right number of copies depends on the frequency attribute of the 
+	// problem template.
+	//
+	// For example, for an addition problem, the right number of copies of the 
+	// first problem template in the array is
+	// is s.addTemplateArr[0].frequency.  Because these attributes are 
+	// protected, you have to use the get methods of the AddTemplate 
+	// class: s.getAddTemplateArr()[0].getFrequency().
+	// Then, you randomly draw 50 questions from the bag, which are used
+	// as the problem set.  When a problem is answered correctly or incorrectly,
+	// you use the get and set functions of the appropriate problem template class to 
+	// adjust its frequency down or up by an appropriate amount. At the
+	// end of the set, you can use the get and set functions in the 
+	// Student class to adjust the time allowed, the level, or both.
+	// Each time you do a new set, you should generate a new bag with
+	// the adjusted frequencies from which to draw the problem set.
+	//
+	// The addModule(s), subModule(s), and mltModule(s) calls above 
+	// should be fully functional once you have written your module
+	// to specifications.  You should be able to uncomment the appropriate
+	// one and add some cout statements to this file see how your module
+	// is working.  I should have the code neede to make divModule(s) 
+	// functional soon.
+	//
+	// While you are working on your modules, I will work the user interface
+	// for the main module and on saving and retreiving the Student objects. 
+	// I will need your modules, completed to specifications, together with 
+	// your documentation as specified in the proposal, by Monday at noon, 
+	// in order to integrate, test, confer with you about any problems, and 
+	// be ready to demonstrate and turn in the project by Thursday.
+	//
+	// Whew!
+
 	return 0;
 }
 
