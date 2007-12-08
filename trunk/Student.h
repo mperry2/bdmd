@@ -35,6 +35,7 @@ const int MAX_ADDEND = 100;
 const int MAX_MINUEND = 100;
 const int MAX_FACTOR = 20;
 const int MAX_NUMERATOR = 400;
+const int MAX_NAME = 40;
 
 class ProblemTemplate
 {
@@ -492,8 +493,53 @@ class Student
 					<< mltTemplateArr[i].getProduct() << '~'
 					<< mltTemplateArr[i].getObjCnt() << '~';
 			}
+			userdatFob.clear();
+			userdatFob.close();
+		}
+		void readUserDat(fstream & userdatFob)
+		{
+			string readStrObj;
+			char readStr[MAX_NAME + 1];
+			userdatFob.open("vincent", ios::in);
+			if(!userdatFob)
+			{
+				cout << endl << "Could not open userdatFob";
+				cout << endl;
+				userdatFob.clear();
+			}
+			else
+			{
+				while(!userdatFob.eof())
+				{
+					userdatFob.getline(readStr, MAX_NAME + 1, '~');
+					name = readStr;
+					userdatFob.getline(readStr, MAX_NAME + 1, '~');
+					addLevel = atoi(readStr);
+					userdatFob.getline(readStr, MAX_NAME + 1, '~');
+					prevAddLevel = atoi(readStr);
+					userdatFob.getline(readStr, MAX_NAME + 1, '~');
+					subLevel = atoi(readStr);
+					userdatFob.getline(readStr, MAX_NAME + 1, '~');
+					prevSubLevel = atoi(readStr);
+					userdatFob.getline(readStr, MAX_NAME + 1, '~');
+					mltLevel = atoi(readStr);
+					userdatFob.getline(readStr, MAX_NAME + 1, '~');
+					prevMltLevel = atoi(readStr);
+					userdatFob.getline(readStr, MAX_NAME + 1, '~');
+					divLevel = atoi(readStr);
+					userdatFob.getline(readStr, MAX_NAME + 1, '~');
+					prevDivLevel = atoi(readStr);
+					userdatFob.getline(readStr, MAX_NAME + 1, '~');
+					addSpeed = atoi(readStr);
+					userdatFob.getline(readStr, MAX_NAME + 1, '~');
+					subSpeed = atoi(readStr);
+					userdatFob.getline(readStr, MAX_NAME + 1, '~');
+					mltSpeed = atoi(readStr);
+					userdatFob.getline(readStr, MAX_NAME + 1, '~');
+					divSpeed = atoi(readStr);
+				}
+			}
 		}
 };
-
 #endif
 
