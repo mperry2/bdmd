@@ -25,6 +25,7 @@
 
 #include <fstream>
 #include "Student.h"
+#include "vkit.h"
 
 using namespace std;
 
@@ -42,6 +43,10 @@ int main()
 
 	// test data members of Student.h class
 	Student s;
+
+	// test readUserDat()
+	s.readUserDat(userdatFob);
+
 	cout << endl
 		<< "s.name: " << s.getName() << endl
 		<< "s.addLevel: " << s.getAddLevel() << endl
