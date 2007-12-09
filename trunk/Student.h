@@ -29,8 +29,6 @@ class SubTemplate;
 class MltTemplate;
 class DivTemplate;
 
-void writeUserDat(fstream & userdatFob);
-
 const int MAX_ADDEND = 100;
 const int MAX_MINUEND = 100;
 const int MAX_FACTOR = 20;
@@ -106,8 +104,11 @@ class AddTemplate : public ProblemTemplate
 		{
 			sum = s;
 		}
+		void setObjCnt(int o)
+		{
+			objCnt = o;
+		}
 };
-//int AddTemplate::objCnt = 0;
 
 class SubTemplate : public ProblemTemplate
 {
@@ -159,8 +160,11 @@ class SubTemplate : public ProblemTemplate
 		{
 			difference = d;
 		}
+		void setObjCnt(int o)
+		{
+			objCnt = o;
+		}
 };
-//int SubTemplate::objCnt = 0;
 
 class MltTemplate : public ProblemTemplate
 {
@@ -212,8 +216,11 @@ class MltTemplate : public ProblemTemplate
 		{
 			product = p;
 		}
+		void setObjCnt(int o)
+		{
+			objCnt = o;
+		}
 };
-//int MltTemplate::objCnt = 0;
 		
 class DivTemplate : public ProblemTemplate
 {
@@ -453,93 +460,8 @@ class Student
 				}
 			}
 		}
-		void writeUserDat(fstream & userdatFob)
-		{
-			userdatFob.open("vincent.dat", ios::out);
-			userdatFob << name << '~'
-				<< addLevel << '~'
-				<< prevAddLevel << '~'
-				<< subLevel << '~'
-				<< prevSubLevel << '~'
-				<< mltLevel << '~'
-				<< prevMltLevel << '~'
-				<< divLevel << '~'
-				<< prevDivLevel << '~'
-				<< addSpeed << '~'
-				<< subSpeed << '~'
-				<< mltSpeed << '~'
-				<< divSpeed << '~';
-			for(int i=0;i<addTemplateArr[0].getObjCnt();i++)
-			{
-				userdatFob << addTemplateArr[i].getFrequency() << '~'
-					<< addTemplateArr[i].getFirstAddend() << '~'
-					<< addTemplateArr[i].getSecondAddend() << '~'
-					<< addTemplateArr[i].getSum() << '~'
-					<< addTemplateArr[i].getObjCnt() << '~';
-			}
-			for(int i=0;i<subTemplateArr[0].getObjCnt();i++)
-			{
-				userdatFob << subTemplateArr[i].getFrequency() << '~'
-					<< subTemplateArr[i].getMinuend() << '~'
-					<< subTemplateArr[i].getSubtrahend() << '~'
-					<< subTemplateArr[i].getDifference() << '~'
-					<< subTemplateArr[i].getObjCnt() << '~';
-			}
-			for(int i=0;i<mltTemplateArr[0].getObjCnt();i++)
-			{
-				userdatFob << mltTemplateArr[i].getFrequency() << '~'
-					<< mltTemplateArr[i].getFirstFactor() << '~'
-					<< mltTemplateArr[i].getSecondFactor() << '~'
-					<< mltTemplateArr[i].getProduct() << '~'
-					<< mltTemplateArr[i].getObjCnt() << '~';
-			}
-			userdatFob.clear();
-			userdatFob.close();
-		}
-		void readUserDat(fstream & userdatFob)
-		{
-			string readStrObj;
-			char readStr[MAX_NAME + 1];
-			userdatFob.open("vincent", ios::in);
-			if(!userdatFob)
-			{
-				cout << endl << "Could not open userdatFob";
-				cout << endl;
-				userdatFob.clear();
-			}
-			else
-			{
-				while(!userdatFob.eof())
-				{
-					userdatFob.getline(readStr, MAX_NAME + 1, '~');
-					name = readStr;
-					userdatFob.getline(readStr, MAX_NAME + 1, '~');
-					addLevel = atoi(readStr);
-					userdatFob.getline(readStr, MAX_NAME + 1, '~');
-					prevAddLevel = atoi(readStr);
-					userdatFob.getline(readStr, MAX_NAME + 1, '~');
-					subLevel = atoi(readStr);
-					userdatFob.getline(readStr, MAX_NAME + 1, '~');
-					prevSubLevel = atoi(readStr);
-					userdatFob.getline(readStr, MAX_NAME + 1, '~');
-					mltLevel = atoi(readStr);
-					userdatFob.getline(readStr, MAX_NAME + 1, '~');
-					prevMltLevel = atoi(readStr);
-					userdatFob.getline(readStr, MAX_NAME + 1, '~');
-					divLevel = atoi(readStr);
-					userdatFob.getline(readStr, MAX_NAME + 1, '~');
-					prevDivLevel = atoi(readStr);
-					userdatFob.getline(readStr, MAX_NAME + 1, '~');
-					addSpeed = atoi(readStr);
-					userdatFob.getline(readStr, MAX_NAME + 1, '~');
-					subSpeed = atoi(readStr);
-					userdatFob.getline(readStr, MAX_NAME + 1, '~');
-					mltSpeed = atoi(readStr);
-					userdatFob.getline(readStr, MAX_NAME + 1, '~');
-					divSpeed = atoi(readStr);
-				}
-			}
-		}
+		void writeUserDat(fstream & userdatFob);
+		void readUserDat(fstream & userdatFob);
 };
 #endif
 
