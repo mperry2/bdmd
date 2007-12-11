@@ -13,7 +13,10 @@ void subModule(Student & s)
 {
 	cout << endl
 		<< "Executing function subModule() implemented" << endl
-		<< "in file named sub.cpp." << endl;
+		<< "in file named sub.cpp." << endl
+		<< endl
+		<< "Press enter to return to main().  ";
+	getchar();
 	cout << endl;
 }
 

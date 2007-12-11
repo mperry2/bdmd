@@ -13,7 +13,10 @@ void mltModule(Student & s)
 {
 	cout << endl
 		<< "Executing function mltModule() implemented" << endl
-		<< "in file named mlt.cpp." << endl;
+		<< "in file named mlt.cpp." << endl
+		<< endl
+		<< "Press enter to return to main().  ";
+	getchar();
 	cout << endl;
 }
 

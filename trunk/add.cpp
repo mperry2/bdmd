@@ -13,7 +13,10 @@ void addModule(Student & s)
 {
 	cout << endl
 		<< "Executing function addModule() implemented" << endl
-		<< "in file named add.cpp." << endl;
+		<< "in file named add.cpp." << endl
+		<< endl
+		<< "Press enter to return to main().  ";
+	getchar();
 	cout << endl;
 }
 
