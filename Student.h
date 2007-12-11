@@ -271,7 +271,7 @@ class Student
 	public:
 		Student()
 		{
-			name = "Vincent";
+			name = "vincent";
 			addLevel = 2;
 			prevAddLevel = 0;
 			subLevel = 4;
@@ -355,6 +355,10 @@ class Student
 		DivTemplate * getDivTemplateArr()
 		{
 			return divTemplateArr;
+		}
+		void setName(string n)
+		{
+			name = n;
 		}
 		void setAddLevel(int al)
 		{
@@ -460,8 +464,8 @@ class Student
 				}
 			}
 		}
-		void writeUserDat(fstream & userdatFob);
 		void readUserDat(fstream & userdatFob);
+		void writeUserDat(fstream & userdatFob);
 };
 #endif
 

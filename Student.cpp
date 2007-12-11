@@ -11,9 +11,14 @@ int DivTemplate::objCnt = 0;
 
 void Student::readUserDat(fstream & userdatFob)
 {
-	string readStrObj = "Error";
-	char readStr[MAX_NAME + 1];
-	userdatFob.open("vincent.dat", ios::in);
+	string readStrObj;
+	readStrObj = getName();
+	readStrObj += ".dat";
+	cout << endl
+		<< "readStrObj: " << readStrObj << endl;
+	char readStr[MAX_NAME + 5];
+	strcpy(readStr, readStrObj.c_str());
+	userdatFob.open(readStr, ios::in);
 	if(!userdatFob)
 	{
 		cout << endl << "Could not open userdatFob";
@@ -31,8 +36,6 @@ void Student::readUserDat(fstream & userdatFob)
 				//<< userdatFob.getline(readStr, MAX_NAME + 1, '~');
 			cout << "readStr: " << readStr << "\t";
 			readStrObj = string(readStr);
-			cout << "readStrObj: " << readStrObj;
-			cout << endl;
 			ctr++;
 		}
 		name = readStrObj;
@@ -99,7 +102,6 @@ void Student::readUserDat(fstream & userdatFob)
 			userdatFob.getline(readStr, MAX_NAME + 1, '~');
 			mltTemplateArr[i].setObjCnt(atoi(readStr));
 		}
-			fobState(userdatFob);
 			userdatFob.clear();
 			userdatFob.close();
 	}
@@ -107,7 +109,13 @@ void Student::readUserDat(fstream & userdatFob)
 }
 void Student::writeUserDat(fstream & userdatFob)
 {
-	userdatFob.open("vincent.dat", ios::out);
+	string writeStrObj;
+	writeStrObj = getName();
+	writeStrObj += ".dat";
+	char writeStr[MAX_NAME + 5];
+	strcpy(writeStr, writeStrObj.c_str());
+	userdatFob.open(writeStr, ios::out);
+	fobState(userdatFob);
 	userdatFob << name << '~'
 		<< addLevel << '~'
 		<< prevAddLevel << '~'

@@ -4,8 +4,11 @@
 
 using namespace std;
 
-void fobState(fstream & fob)
-{
+// [debugging]
+
+// prints fob status bits
+void fobState(fstream & fob) 
+{{{
 	cout << endl;
 	cout << "eof bit: " << fob.eof() << endl;
 	cout << "fail bit: " << fob.fail() << endl;
@@ -13,4 +16,17 @@ void fobState(fstream & fob)
 	cout << "good bit: " << fob.good() << endl;
 	cout << endl;
 	fob.clear();
-}
+}}}
+
+// [utility]
+
+// clears screen under Win and Lin
+void clearScreen()
+{{{
+#ifdef _WIN32
+	system("cls");
+#else
+	system("clear");
+#endif
+}}}
+
