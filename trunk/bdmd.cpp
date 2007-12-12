@@ -258,7 +258,7 @@ void loginUser(Student & s, fstream & userdatFob)
 		if(inputStrObj == "n")
 		{
 			cout << endl
-				<< "   What is the maximum addend you want to use" << endl
+				<< "   What is the maximum minuend you want to use" << endl
 				<< "   to begin with?  ";
 			getline(cin, inputStrObj);
 			ss.clear();

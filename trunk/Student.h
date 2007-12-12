@@ -60,6 +60,7 @@ class AddTemplate : public ProblemTemplate
 		int firstAddend;
 		int secondAddend;
 		int sum;
+		int addTemplateNdx;
 		static int objCnt;
 	public:
 		AddTemplate()
@@ -68,6 +69,7 @@ class AddTemplate : public ProblemTemplate
 			firstAddend = -1;
 			secondAddend = -1;
 			sum = firstAddend + secondAddend;
+			addTemplateNdx = objCnt -1;
 		}
 		AddTemplate(int fa, int sa)
 		{
@@ -75,6 +77,7 @@ class AddTemplate : public ProblemTemplate
 			firstAddend = fa;
 			secondAddend = sa;
 			sum = firstAddend + secondAddend;
+			addTemplateNdx = objCnt -1;
 		}
 		int getFirstAddend()
 		{
@@ -87,6 +90,10 @@ class AddTemplate : public ProblemTemplate
 		int getSum()
 		{
 			return sum;
+		}
+		int getAddTemplateNdx()
+		{
+			return addTemplateNdx;
 		}
 		int getObjCnt()
 		{
@@ -104,6 +111,10 @@ class AddTemplate : public ProblemTemplate
 		{
 			sum = s;
 		}
+		void setAddTemplateNdx(int n)
+		{
+			addTemplateNdx = n;
+		}
 		void setObjCnt(int o)
 		{
 			objCnt = o;
@@ -116,6 +127,7 @@ class SubTemplate : public ProblemTemplate
 		int minuend;
 		int subtrahend;
 		int difference;
+		int subTemplateNdx;
 		static int objCnt;
 	public:
 		SubTemplate()
@@ -124,6 +136,7 @@ class SubTemplate : public ProblemTemplate
 			minuend = -1;
 			subtrahend = -1;
 			difference = minuend - subtrahend;
+			subTemplateNdx = objCnt - 1;
 		}
 		SubTemplate(int m, int s)
 		{
@@ -131,6 +144,7 @@ class SubTemplate : public ProblemTemplate
 			minuend = m;
 			subtrahend = s;
 			difference = minuend - subtrahend;
+			subTemplateNdx = objCnt - 1;
 		}
 		int getMinuend()
 		{
@@ -143,6 +157,10 @@ class SubTemplate : public ProblemTemplate
 		int getDifference()
 		{
 			return difference;
+		}
+		int getSubTemplateNdx()
+		{
+			return subTemplateNdx;
 		}
 		int getObjCnt()
 		{
@@ -160,6 +178,10 @@ class SubTemplate : public ProblemTemplate
 		{
 			difference = d;
 		}
+		void setSubTemplateNdx(int n)
+		{
+			subTemplateNdx = n;
+		}
 		void setObjCnt(int o)
 		{
 			objCnt = o;
@@ -172,6 +194,7 @@ class MltTemplate : public ProblemTemplate
 		int firstFactor;
 		int secondFactor;
 		int product;
+		int mltTemplateNdx;
 		static int objCnt;
 	public:
 		MltTemplate()
@@ -180,6 +203,7 @@ class MltTemplate : public ProblemTemplate
 			firstFactor = -1;
 			secondFactor = 500;
 			product = firstFactor * secondFactor;
+			mltTemplateNdx = objCnt - 1;
 		}
 		MltTemplate(int ff, int sf)
 		{
@@ -187,6 +211,7 @@ class MltTemplate : public ProblemTemplate
 			firstFactor = ff;
 			secondFactor = sf;
 			product = firstFactor * secondFactor;
+			mltTemplateNdx = objCnt - 1;
 		}
 		int getFirstFactor()
 		{
@@ -199,6 +224,10 @@ class MltTemplate : public ProblemTemplate
 		int getProduct()
 		{
 			return product;
+		}
+		int getMltTemplateNdx()
+		{
+			return mltTemplateNdx;
 		}
 		int getObjCnt()
 		{
@@ -215,6 +244,10 @@ class MltTemplate : public ProblemTemplate
 		void setProduct(int p)
 		{
 			product = p;
+		}
+		void setMltTemplateNdx(int n)
+		{
+			mltTemplateNdx = n;
 		}
 		void setObjCnt(int o)
 		{
