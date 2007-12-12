@@ -25,7 +25,6 @@ void Student::readUserDat(fstream & userdatFob)
 	}
 	else
 	{
-		int ctr = 0;
 		userdatFob.getline(readStr, MAX_NAME + 1, '~');
 		name = readStrObj;
 		userdatFob.getline(readStr, MAX_NAME + 1, '~');
@@ -63,6 +62,8 @@ void Student::readUserDat(fstream & userdatFob)
 			userdatFob.getline(readStr, MAX_NAME + 1, '~');
 			addTemplateArr[i].setSum(atoi(readStr));
 			userdatFob.getline(readStr, MAX_NAME + 1, '~');
+			addTemplateArr[i].setAddTemplateNdx(atoi(readStr));
+			userdatFob.getline(readStr, MAX_NAME + 1, '~');
 			addTemplateArr[i].setObjCnt(atoi(readStr));
 		}
 		for(int i=0;i<subTemplateArr[0].getObjCnt();i++)
@@ -75,6 +76,8 @@ void Student::readUserDat(fstream & userdatFob)
 			subTemplateArr[i].setSubtrahend(atoi(readStr));
 			userdatFob.getline(readStr, MAX_NAME + 1, '~');
 			subTemplateArr[i].setDifference(atoi(readStr));
+			userdatFob.getline(readStr, MAX_NAME + 1, '~');
+			subTemplateArr[i].setSubTemplateNdx(atoi(readStr));
 			userdatFob.getline(readStr, MAX_NAME + 1, '~');
 			subTemplateArr[i].setObjCnt(atoi(readStr));
 		}
@@ -89,10 +92,15 @@ void Student::readUserDat(fstream & userdatFob)
 			userdatFob.getline(readStr, MAX_NAME + 1, '~');
 			mltTemplateArr[i].setProduct(atoi(readStr));
 			userdatFob.getline(readStr, MAX_NAME + 1, '~');
+			mltTemplateArr[i].setMltTemplateNdx(atoi(readStr));
+			userdatFob.getline(readStr, MAX_NAME + 1, '~');
 			mltTemplateArr[i].setObjCnt(atoi(readStr));
 		}
-			userdatFob.clear();
 			userdatFob.close();
+		if(!userdatFob)
+		{
+			cout << endl << "Unable to close userdatFile in Student.cpp.";
+		}
 	}
 		
 }
@@ -123,6 +131,7 @@ void Student::writeUserDat(fstream & userdatFob)
 			<< addTemplateArr[i].getFirstAddend() << '~'
 			<< addTemplateArr[i].getSecondAddend() << '~'
 			<< addTemplateArr[i].getSum() << '~'
+			<< addTemplateArr[i].getAddTemplateNdx() << '~'
 			<< addTemplateArr[i].getObjCnt() << '~';
 	}
 	for(int i=0;i<subTemplateArr[0].getObjCnt();i++)
@@ -131,6 +140,7 @@ void Student::writeUserDat(fstream & userdatFob)
 			<< subTemplateArr[i].getMinuend() << '~'
 			<< subTemplateArr[i].getSubtrahend() << '~'
 			<< subTemplateArr[i].getDifference() << '~'
+			<< subTemplateArr[i].getSubTemplateNdx() << '~'
 			<< subTemplateArr[i].getObjCnt() << '~';
 	}
 	for(int i=0;i<mltTemplateArr[0].getObjCnt();i++)
@@ -139,8 +149,12 @@ void Student::writeUserDat(fstream & userdatFob)
 			<< mltTemplateArr[i].getFirstFactor() << '~'
 			<< mltTemplateArr[i].getSecondFactor() << '~'
 			<< mltTemplateArr[i].getProduct() << '~'
+			<< mltTemplateArr[i].getMltTemplateNdx() << '~'
 			<< mltTemplateArr[i].getObjCnt() << '~';
 	}
-	userdatFob.clear();
 	userdatFob.close();
+	if(!userdatFob)
+	{
+		cout << endl << "Unable to close userdatFile in Student.cpp.";
+	}
 }

@@ -480,7 +480,7 @@ class Student
 				int ff = l;
 				for(int sf=0;sf<=l;sf++)
 				{
-					int p = ff + sf;
+					int p = ff * sf;
 					mltTemplateArr[ndx].setFirstFactor(ff);
 					mltTemplateArr[ndx].setSecondFactor(sf);
 					mltTemplateArr[ndx].setProduct(p);
@@ -489,7 +489,7 @@ class Student
 				int sf = l;
 				for(int ff=0;ff<l;ff++)
 				{
-					int p = ff + sf;
+					int p = ff * sf;
 					mltTemplateArr[ndx].setFirstFactor(ff);
 					mltTemplateArr[ndx].setSecondFactor(sf);
 					mltTemplateArr[ndx].setProduct(p);
