@@ -14,8 +14,6 @@ void Student::readUserDat(fstream & userdatFob)
 	string readStrObj;
 	readStrObj = getName();
 	readStrObj += ".dat";
-	cout << endl
-		<< "readStrObj: " << readStrObj << endl;
 	char readStr[MAX_NAME + 5];
 	strcpy(readStr, readStrObj.c_str());
 	userdatFob.open(readStr, ios::in);
@@ -29,15 +27,6 @@ void Student::readUserDat(fstream & userdatFob)
 	{
 		int ctr = 0;
 		userdatFob.getline(readStr, MAX_NAME + 1, '~');
-		//debug
-		if(ctr < 5)
-		{
-			//cout << "userdatFob.getline(readStr, MAX_NAME + 1, '~'): "
-				//<< userdatFob.getline(readStr, MAX_NAME + 1, '~');
-			cout << "readStr: " << readStr << "\t";
-			readStrObj = string(readStr);
-			ctr++;
-		}
 		name = readStrObj;
 		userdatFob.getline(readStr, MAX_NAME + 1, '~');
 		addLevel = atoi(readStr);
@@ -115,7 +104,6 @@ void Student::writeUserDat(fstream & userdatFob)
 	char writeStr[MAX_NAME + 5];
 	strcpy(writeStr, writeStrObj.c_str());
 	userdatFob.open(writeStr, ios::out);
-	fobState(userdatFob);
 	userdatFob << name << '~'
 		<< addLevel << '~'
 		<< prevAddLevel << '~'
