@@ -35,7 +35,7 @@ void subModule(Student & s)
 	int cumWrong;
 	int cumProblems;
 	int percentRight;
-	const int SET_SIZE = 50;
+	const int SET_SIZE = 10;
 	string wantsAnotherSet = "y";
 
 	while(wantsAnotherSet == "y" || wantsAnotherSet == "Y")
@@ -117,8 +117,19 @@ void subModule(Student & s)
 				}
 			} else
 			{
-				cout << "     Sorry, the correct answer is " << subBagArr[ndxSelectedProblem].getDifference() << "."
+				cout << "     Sorry, the correct answer is " << subBagArr[ndxSelectedProblem].getDifference()
+					<< "."
 					<< endl;
+				oldFreq = subBagArr[ndxSelectedProblem].getFrequency();
+				cout << endl 
+					<< "oldFreq: " << oldFreq << endl;
+				if(oldFreq <= 5)
+				{
+					currSubTemplateNdx = subBagArr[ndxSelectedProblem].getSubTemplateNdx();
+					cout << "currSubTemplateNdx: " << currSubTemplateNdx << endl;
+					newFreq = oldFreq * 2;
+					s.getSubTemplateArr()[currSubTemplateNdx].setFrequency(newFreq);
+				}
 			}
 		}
 		percentRight = cumRight / SET_SIZE;
