@@ -161,6 +161,7 @@ void teamNotes()
 
 void loginUser(Student & s, fstream & userdatFob)
 {{{
+	
 	string userNameStrob;
 	string userFileNameStrob;
 	char userNameStr[MAX_NAME+1];
@@ -171,10 +172,10 @@ void loginUser(Student & s, fstream & userdatFob)
 	int levelChosen;
 
 	clearScreen();
-	cout << "   Welcome to Big Daddy's Math Drills." << endl << endl
-		<< "   Please sign in using a one-word username" << endl
-		<< "   that is case sensitive, has no spaces, and" << endl
-		<< "   uses only letters or numbers.  ";
+	cout << "     Welcome to Big Daddy's Math Drills." << endl << endl
+		<< "     Please sign in using a one-word username" << endl
+		<< "     that is case sensitive, has no spaces, and" << endl
+		<< "     uses only letters or numbers.  ";
 	getline(cin, userNameStrob);
 	s.setName(userNameStrob);
 	strcpy(userNameStr, userNameStrob.c_str());
@@ -185,144 +186,148 @@ void loginUser(Student & s, fstream & userdatFob)
 	{
 		userdatFob.close();
 		s.readUserDat(userdatFob);
-		cout << "   Profile for " << userNameStr << " has been found"  << endl
-			<< "   and loaded." << endl;
 		userdatFob.clear();
 		userdatFob.close();
+		cout << endl
+			<< "     Profile for " << userNameStr << " has been found"  << endl
+			<< "     and loaded." << endl
+			<< endl
+			<< "     Press enter to continue.  ";
+		getchar();
+
 	}
 	else
 	{
 		cout << endl
-			<< "   No profile for " << userNameStr << " has been found." << endl
+			<< "     No profile for " << userNameStr << " has been found." << endl
 			<< endl
-			<< "   A new one will be created based on your preferences." << endl;
+			<< "     A new one will be created based on your preferences." << endl;
 		cout << endl
-			<< "   Press enter to continue.  ";
+			<< "     Press enter to continue.  ";
 		getchar();
 		cout << endl
-			<< "   In the addition drill, you practice" << endl
-			<< "   problems in which you add two numbers" << endl 
-			<< "   each of which is called an 'addend.'" << endl
-			<< "   As you gain speed and accuracy, the maximum" << endl
-			<< "   size of the addends you are given is automatically" << endl
-			<< "   increased.  We recommend that you start with the default," << endl
-			<< "   which uses addends of 0-2, and work your way up, but you" << endl
-			<< "   may choose a maximum addend of from 0 to 100."  << endl
+			<< "     In the addition drill, you practice" << endl
+			<< "     problems in which you add two numbers" << endl 
+			<< "     each of which is called an 'addend.'" << endl
+			<< "     As you gain speed and accuracy, the maximum" << endl
+			<< "     size of the addends you are given is automatically" << endl
+			<< "     increased.  We recommend that you start with the default," << endl
+			<< "     which uses addends of 0-2, and work your way up, but you" << endl
+			<< "     may choose a maximum addend of from 0 to 100."  << endl
 			<<  endl;
-		cout << "   Do you want to start with the default maxumum" << endl
-			<< "   addend of 2 (y or n)?  ";
+		cout << "     Do you want to start with the default maxumum" << endl
+			<< "     addend of 2 (y or n)?  ";
 		getline(cin, inputStrObj);
 		if(inputStrObj == "n")
 		{
 			cout << endl
-				<< "   What is the maximum addend you want to use" << endl
-				<< "   to begin with?  ";
+				<< "     What is the maximum addend you want to use" << endl
+				<< "     to begin with?  ";
 			getline(cin, inputStrObj);
 			ss.clear();
 			ss << inputStrObj;
 			ss >> levelChosen;
 			s.setAddLevel(levelChosen);
 			cout << endl
-				<< "   You have chosen to start by with" << endl
-				<< "   addends up to " << levelChosen << "." << endl
+				<< "     You have chosen to start by with" << endl
+				<< "     addends up to " << levelChosen << "." << endl
 				<< endl
-				<< "   Press enter to continue.  ";
+				<< "     Press enter to continue.  ";
 			getchar();
 		}
 		else
 		{
 			cout << endl
-				<< "   Good choice.  You will start with the default" << endl
-				<< "   maximum addend of 2." << endl
+				<< "     Good choice.  You will start with the default" << endl
+				<< "     maximum addend of 2." << endl
 				<< endl
-				<< "   Press enter to continue.  ";
+				<< "     Press enter to continue.  ";
 			getchar();
 		}
 		cout << endl
-			<< "   In the subtraction drill, you practice" << endl
-			<< "   problems in which you subtract a number" << endl
-			<< "   called a 'subrahend' from another number" << endl
-			<< "   called a 'minuend.'  In this drill, the" << endl
-			<< "   minuend will always be equal to or larger" << endl
-			<< "   than the subtrahend.  As you gain speed" << endl
-			<< "   accuracy, the maximimum size of the" << endl
-			<< "   minuends you are given is automatically" << endl
-			<< "   increased.  We recommend that you start" << endl
-			<< "   with the default which uses minuends of" << endl
-			<< "   0-4, and work your way up, but you" << endl
-			<< "   may choose a maximum minuend of from 0 to 200."  << endl		
+			<< "     In the subtraction drill, you practice" << endl
+			<< "     problems in which you subtract a number" << endl
+			<< "     called a 'subrahend' from another number" << endl
+			<< "     called a 'minuend.'  In this drill, the" << endl
+			<< "     minuend will always be equal to or larger" << endl
+			<< "     than the subtrahend.  As you gain speed" << endl
+			<< "     accuracy, the maximimum size of the" << endl
+			<< "     minuends you are given is automatically" << endl
+			<< "     increased.  We recommend that you start" << endl
+			<< "     with the default which uses minuends of" << endl
+			<< "     0-4, and work your way up, but you" << endl
+			<< "     may choose a maximum minuend of from 0 to 200."  << endl		
 			<<  endl;
-		cout << "   Do you want to start with the default maxumum" << endl
-			<< "   minuend of 4 (y or n)?  ";
+		cout << "     Do you want to start with the default maxumum" << endl
+			<< "     minuend of 4 (y or n)?  ";
 		getline(cin, inputStrObj);
 		if(inputStrObj == "n")
 		{
 			cout << endl
-				<< "   What is the maximum minuend you want to use" << endl
-				<< "   to begin with?  ";
+				<< "     What is the maximum minuend you want to use" << endl
+				<< "     to begin with?  ";
 			getline(cin, inputStrObj);
 			ss.clear();
 			ss << inputStrObj;
 			ss >> levelChosen;
 			s.setSubLevel(levelChosen);
 			cout << endl
-				<< "   You have chosen to start by with" << endl
-				<< "   minuends up to " << levelChosen << "." << endl
+				<< "     You have chosen to start by with" << endl
+				<< "     minuends up to " << levelChosen << "." << endl
 				<< endl
-				<< "   Press enter to continue.  ";
+				<< "     Press enter to continue.  ";
 			getchar();
 		}
 		else
 		{
 			cout << endl
-				<< "   Good choice.  You will start with the default" << endl
-				<< "   maximum minuend of 4." << endl
+				<< "     Good choice.  You will start with the default" << endl
+				<< "     maximum minuend of 4." << endl
 				<< endl
-				<< "   Press enter to continue.  ";
+				<< "     Press enter to continue.  ";
 			getchar();
 		}
 		cout << endl
-			<< "   In the multiplication drill, you practice" << endl
-			<< "   problems in which you multiply two numbers" << endl
-			<< "   'factors.  As you gain speed" << endl
-			<< "   accuracy, the maximimum size of the" << endl
-			<< "   factors you are given is automatically" << endl
-			<< "   increased.  We recommend that you start" << endl
-			<< "   with the default, which uses factors of" << endl
-			<< "   0-2, and work your way up, but you" << endl
-			<< "   may choose a maximum factor of from 0 to 200."  << endl		
+			<< "     In the multiplication drill, you practice" << endl
+			<< "     problems in which you multiply two numbers" << endl
+			<< "     'factors.  As you gain speed" << endl
+			<< "     accuracy, the maximimum size of the" << endl
+			<< "     factors you are given is automatically" << endl
+			<< "     increased.  We recommend that you start" << endl
+			<< "     with the default, which uses factors of" << endl
+			<< "     0-2, and work your way up, but you" << endl
+			<< "     may choose a maximum factor of from 0 to 200."  << endl		
 			<<  endl;
-		cout << "   Do you want to start with the default maxumum" << endl
-			<< "   factor of 2 (y or n)?  ";
+		cout << "     Do you want to start with the default maxumum" << endl
+			<< "     factor of 2 (y or n)?  ";
 		getline(cin, inputStrObj);
 		if(inputStrObj == "n")
 		{
 			cout << endl
-				<< "   What is the maximum factor you want to use" << endl
-				<< "   to begin with?  ";
+				<< "     What is the maximum factor you want to use" << endl
+				<< "     to begin with?  ";
 			getline(cin, inputStrObj);
 			ss.clear();
 			ss << inputStrObj;
 			ss >> levelChosen;
 			s.setMltLevel(levelChosen);
 			cout << endl
-				<< "   You have chosen to start by with" << endl
-				<< "   minuends up to " << levelChosen << "." << endl
+				<< "     You have chosen to start by with" << endl
+				<< "     minuends up to " << levelChosen << "." << endl
 				<< endl
-				<< "   Press enter to continue.  ";
+				<< "     Press enter to continue.  ";
 			getchar();
 		}
 		else
 		{
 			cout << endl
-				<< "   Good choice.  You will start with the default" << endl
-				<< "   maximum factor of 2." << endl
+				<< "     Good choice.  You will start with the default" << endl
+				<< "    maximum factor of 2." << endl
 				<< endl
-				<< "   Press enter to continue.  ";
+				<< "     Press enter to continue.  ";
 			getchar();
 		}
 	}
-	printStudent(s);
 }}}
 
 void displayMainMenu(Student & s, fstream & userdatFob)
@@ -343,7 +348,7 @@ void displayMainMenu(Student & s, fstream & userdatFob)
 		}
 		if(mainMenu == 3)
 		{
-			subModule(s);
+			mltModule(s);
 		}
 		if(mainMenu == 4)
 		{
@@ -414,88 +419,4 @@ void displayHelp()
 	cout << endl;
 }}}
 
-void printStudent(Student & s)
-{{{
-	int level;
-	// print data members of Student.h class
-	cout << endl
-		<< "s.name: " << s.getName() << endl
-		<< "s.addLevel: " << s.getAddLevel() << endl
-		<< "s.subLevel: " << s.getSubLevel() << endl
-		<< "s.mltLevel: " << s.getMltLevel() << endl
-		<< "s.divLevel: " << s.getDivLevel() << endl
-		<< "s.addSpeed: " << s.getAddSpeed() << endl
-		<< "s.subSpeed: " << s.getSubSpeed() << endl
-		<< "s.mltSpeed: " << s.getMltSpeed() << endl
-		<< "s.divSpeed: " << s.getDivSpeed() << endl
-		<< "s.getAddTemplateArr()[0].getFrequency(): " << s.getAddTemplateArr()[0].getFrequency() << endl
-		<< "s.getMltTemplateArr()[440].getFrequency(): " << s.getMltTemplateArr()[440].getFrequency();
-	cout << "   Press enter to continue.  ";
-	getchar();
-
-	//--------------------------------------------------
-	// //print template arrays
-	// cout << endl
-	// 	<< "addLevel: ";
-	// cin >> level;
-	// s.setAddLevel(level);		
-	// printAddTemplateArr(s);
-	//-------------------------------------------------- 
-
-	//--------------------------------------------------
-	// cout << endl
-	// 	<< "subLevel: ";
-	// cin >> level;
-	// s.setSubLevel(level);		
-	// printSubTemplateArr(s);
-	// 
-	// cout << endl
-	// 	<< "mltLevel: ";
-	// cin >> level;
-	// s.setMltLevel(level);		
-	// printMltTemplateArr(s);
-	//-------------------------------------------------- 
-}}}
-
-void printAddTemplateArr(Student & s)
-{{{
-	cout << endl
-		<< "addTemplateArr.objCnt: " << s.getAddTemplateArr()[0].getObjCnt() << endl;
-	int numUsed = (s.getAddLevel() + 1) * (s.getAddLevel() + 1);
-	for(int i=0;i<numUsed;i++)
-	{
-		cout << "s.addTemplateArr[" << i << "].firstAddend: " << s.getAddTemplateArr()[i].getFirstAddend() << endl;
-		cout << "s.addTemplateArr[" << i << "].secondAddend: " << s.getAddTemplateArr()[i].getSecondAddend() << endl
-			<< endl;
-		//cout << "s.addTemplateArr[" << i << "].sum: " << s.getAddTemplateArr()[i].getSum() << endl;
-	}
-}}}
-
-void printSubTemplateArr(Student & s)
-{{{
-	cout << endl
-		<< "subTemplateArr.objCnt: " << s.getSubTemplateArr()[0].getObjCnt() << endl;
-	int numUsed = (((s.getSubLevel() + 1) * (s.getSubLevel() + 1)) / 2) + (s.getSubLevel() / 2) + 1;
-	for(int i=0;i<numUsed;i++)
-	{
-		cout << "s.subTemplateArr[" << i << "].minuend: " << s.getSubTemplateArr()[i].getMinuend() << endl;
-		cout << "s.subTemplateArr[" << i << "].subtrahend: " << s.getSubTemplateArr()[i].getSubtrahend() << endl
-			<< endl;
-		//cout << "s.subTemplateArr[" << i << "].difference: " << s.getSubTemplateArr()[i].getDifference() << endl;
-	}
-}}}
-
-void printMltTemplateArr(Student & s)
-{{{
-	cout << endl
-		<< "mltTemplateArr.objCnt: " << s.getMltTemplateArr()[0].getObjCnt() << endl;
-	int numUsed = (s.getMltLevel() + 1) * (s.getMltLevel() + 1);
-	for(int i=0;i<numUsed;i++)
-	{
-		cout << "s.mltTemplateArr[" << i << "].firstFactor: " << s.getMltTemplateArr()[i].getFirstFactor() << endl
-			<< "s.mltTemplateArr[" << i << "].secondFactor: " << s.getMltTemplateArr()[i].getSecondFactor() << endl
-			//<< "s.mltTemplateArr[" << i << "].product: " << s.getMltTemplateArr()[i].getProduct() 
-			<< endl;
-	}
-}}}
 
