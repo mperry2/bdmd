@@ -12,13 +12,14 @@ int DivTemplate::objCnt = 0;
 void Student::readUserDat(fstream & userdatFob)
 {
 	string readStrObj;
-	char readStr[MAX_NAME + 5];
 	string nameStrObj;
+	char readStr[MAX_NAME + 5];
 	int numUniqueAddTemplates;
 	int numUniqueSubTemplates;
 	int numUniqueMltTemplates;
 	nameStrObj = getName();
-	readStrObj = nameStrObj + ".dat";
+	readStrObj = nameStrObj;
+	readStrObj += ".dat";
 	strcpy(readStr, readStrObj.c_str());
 	userdatFob.open(readStr, ios::in);
 	if(!userdatFob)
@@ -30,7 +31,7 @@ void Student::readUserDat(fstream & userdatFob)
 	else
 	{
 		userdatFob.getline(readStr, MAX_NAME + 1, '~');
-		name = readStrObj;
+		name = nameStrObj;
 		userdatFob.getline(readStr, MAX_NAME + 1, '~');
 		addLevel = atoi(readStr);
 		userdatFob.getline(readStr, MAX_NAME + 1, '~');
@@ -121,7 +122,8 @@ void Student::writeUserDat(fstream & userdatFob)
 	int numUniqueMltTemplates;
 	
 	nameStrObj = getName();
-	writeStrObj = nameStrObj + ".dat";
+	writeStrObj = nameStrObj;
+	writeStrObj += ".dat";
 	strcpy(writeStr, writeStrObj.c_str());
 	userdatFob.open(writeStr, ios::out);
 	userdatFob << name << '~'
