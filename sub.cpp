@@ -110,6 +110,8 @@ void subModule(Student & s)
 			startTime = time(NULL);
 			//cout << endl << endl << "startTime: " << startTime << endl;
 			//cin.sync(); This doesn't seem to flush cin.
+			//cin.flush();
+			cin.clear();
 			cout << endl
 				<< "     " << subBagArr[ndxSelectedProblem].getMinuend() << "  -  "
 				<< subBagArr[ndxSelectedProblem].getSubtrahend() << "  =  ";
