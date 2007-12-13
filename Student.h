@@ -279,7 +279,6 @@ class DivTemplate : public ProblemTemplate
 			quotient = numerator / denominator;
 		}
 };
-//int DivTemplate::objCnt = 0;
 
 class Student
 {

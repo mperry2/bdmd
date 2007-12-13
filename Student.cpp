@@ -12,9 +12,13 @@ int DivTemplate::objCnt = 0;
 void Student::readUserDat(fstream & userdatFob)
 {
 	string readStrObj;
-	readStrObj = getName();
-	readStrObj += ".dat";
 	char readStr[MAX_NAME + 5];
+	string nameStrObj;
+	int numUniqueAddTemplates;
+	int numUniqueSubTemplates;
+	int numUniqueMltTemplates;
+	nameStrObj = getName();
+	readStrObj = nameStrObj + ".dat";
 	strcpy(readStr, readStrObj.c_str());
 	userdatFob.open(readStr, ios::in);
 	if(!userdatFob)
@@ -51,7 +55,8 @@ void Student::readUserDat(fstream & userdatFob)
 		mltSpeed = atoi(readStr);
 		userdatFob.getline(readStr, MAX_NAME + 1, '~');
 		divSpeed = atoi(readStr);
-		for(int i=0;i<addTemplateArr[0].getObjCnt();i++)
+		numUniqueAddTemplates = (MAX_ADDEND + 1) * (MAX_ADDEND + 1);
+		for(int i=0;i<numUniqueAddTemplates;i++)
 		{
 			userdatFob.getline(readStr, MAX_NAME + 1, '~');
 			addTemplateArr[i].setFrequency(atoi(readStr));
@@ -66,7 +71,8 @@ void Student::readUserDat(fstream & userdatFob)
 			userdatFob.getline(readStr, MAX_NAME + 1, '~');
 			addTemplateArr[i].setObjCnt(atoi(readStr));
 		}
-		for(int i=0;i<subTemplateArr[0].getObjCnt();i++)
+		numUniqueSubTemplates = (((MAX_MINUEND + 1) * (MAX_MINUEND + 1)) / 2) + (MAX_MINUEND / 2) + 1;
+		for(int i=0;i<numUniqueSubTemplates;i++)
 		{
 			userdatFob.getline(readStr, MAX_NAME + 1, '~');
 			subTemplateArr[i].setFrequency(atoi(readStr));
@@ -81,6 +87,7 @@ void Student::readUserDat(fstream & userdatFob)
 			userdatFob.getline(readStr, MAX_NAME + 1, '~');
 			subTemplateArr[i].setObjCnt(atoi(readStr));
 		}
+		numUniqueMltTemplates = (MAX_FACTOR + 1) * (MAX_FACTOR + 1);
 		for(int i=0;i<mltTemplateArr[0].getObjCnt();i++)
 		{
 			userdatFob.getline(readStr, MAX_NAME + 1, '~');
@@ -107,9 +114,14 @@ void Student::readUserDat(fstream & userdatFob)
 void Student::writeUserDat(fstream & userdatFob)
 {
 	string writeStrObj;
-	writeStrObj = getName();
-	writeStrObj += ".dat";
+	string nameStrObj;
 	char writeStr[MAX_NAME + 5];
+	int numUniqueAddTemplates;
+	int numUniqueSubTemplates;
+	int numUniqueMltTemplates;
+	
+	nameStrObj = getName();
+	writeStrObj = nameStrObj + ".dat";
 	strcpy(writeStr, writeStrObj.c_str());
 	userdatFob.open(writeStr, ios::out);
 	userdatFob << name << '~'
@@ -125,7 +137,8 @@ void Student::writeUserDat(fstream & userdatFob)
 		<< subSpeed << '~'
 		<< mltSpeed << '~'
 		<< divSpeed << '~';
-	for(int i=0;i<addTemplateArr[0].getObjCnt();i++)
+	numUniqueAddTemplates = (MAX_ADDEND + 1) * (MAX_ADDEND + 1);
+	for(int i=0;i<numUniqueAddTemplates;i++)
 	{
 		userdatFob << addTemplateArr[i].getFrequency() << '~'
 			<< addTemplateArr[i].getFirstAddend() << '~'
@@ -134,7 +147,8 @@ void Student::writeUserDat(fstream & userdatFob)
 			<< addTemplateArr[i].getAddTemplateNdx() << '~'
 			<< addTemplateArr[i].getObjCnt() << '~';
 	}
-	for(int i=0;i<subTemplateArr[0].getObjCnt();i++)
+	numUniqueSubTemplates = (((MAX_MINUEND + 1) * (MAX_MINUEND + 1)) / 2) + (MAX_MINUEND / 2) + 1;
+	for(int i=0;i<numUniqueSubTemplates;i++)
 	{
 		userdatFob << subTemplateArr[i].getFrequency() << '~'
 			<< subTemplateArr[i].getMinuend() << '~'
@@ -143,6 +157,7 @@ void Student::writeUserDat(fstream & userdatFob)
 			<< subTemplateArr[i].getSubTemplateNdx() << '~'
 			<< subTemplateArr[i].getObjCnt() << '~';
 	}
+	numUniqueMltTemplates = (MAX_FACTOR + 1) * (MAX_FACTOR + 1);
 	for(int i=0;i<mltTemplateArr[0].getObjCnt();i++)
 	{
 		userdatFob << mltTemplateArr[i].getFrequency() << '~'

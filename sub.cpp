@@ -1,7 +1,7 @@
 // implementation of subtraction module by vd
 
 #include <iostream>
-#include <time.h>
+#include <ctime>
 #include <cstdlib>
 #include <string>
 #include <sstream>
@@ -28,15 +28,18 @@ void subModule(Student & s)
 	int newFreq;
 	int subTemplateNdx;
 	int currSubTemplateNdx;
-	clock_t startTime, endTime;
+	time_t startTime;
+	time_t endTime;
 	float timeElapsed;
 	int numSeconds;
 	int cumRight;
 	int cumWrong;
 	int cumProblems;
 	int percentRight;
-	const int SET_SIZE = 10;
+	const int SET_SIZE = 50;
 	string wantsAnotherSet = "y";
+	int tooLong;
+	int delayTimer;
 
 	while(wantsAnotherSet == "y" || wantsAnotherSet == "Y")
 	{
@@ -45,6 +48,9 @@ void subModule(Student & s)
 
 		level = s.getSubLevel();
 		numSeconds = s.getSubSpeed();
+		cumRight = 0;
+		cumWrong = 0;
+		cumProblems = 0;
 		//debug
 		cout << endl
 			<< "level: " << level << endl
@@ -55,11 +61,13 @@ void subModule(Student & s)
 		for(int i = 0; i < SET_SIZE; i++)
 		{
 			numProblems = 0;
+			tooLong = 0;
 			for(int i = 0; i < templatesUsed; i++)
 			{
 				numProblems += s.getSubTemplateArr()[i].getFrequency();
 				cout << endl
-					<< "s.getSubTemplateArr()[" << i << "].getFrequency(): " << s.getSubTemplateArr()[i].getFrequency();
+					<< "s.getSubTemplateArr()[" << i << "].getFrequency(): " 
+					<< s.getSubTemplateArr()[i].getFrequency();
 			}
 			//debug
 			cout << endl
@@ -91,59 +99,118 @@ void subModule(Student & s)
 			cout << "numProblems: " << numProblems << endl;
 			ndxSelectedProblem = rand() % numProblems;
 			cout << "ndxSelectedProblem: " << ndxSelectedProblem << endl;
+			startTime = time(NULL);
+			cout << endl << endl << "startTime: " << startTime << endl;
 			cout << endl
 				<< "     " << subBagArr[ndxSelectedProblem].getMinuend() << "  -  "
 				<< subBagArr[ndxSelectedProblem].getSubtrahend() << "  =  ";
-			startTime = clock();
 			getline(cin, userInputStrob);
-			endTime = clock();
-			timeElapsed = (endTime - startTime) / CLOCKS_PER_SEC;
+			endTime = time(NULL);
+			cout << "endTime: " << endTime << endl;
+			timeElapsed = (endTime - startTime);
+			cout << "timeElapsed: " << timeElapsed << endl;
+			if(timeElapsed > s.getSubSpeed())
+			{
+				tooLong = 1;
+			}
 			ss.clear();
 			ss << userInputStrob;
 			ss >> userAnswer;
+			cumProblems++;
 			if(userAnswer == subBagArr[ndxSelectedProblem].getDifference())
 			{
 				cout << endl
 					<< "     Correct!" << endl;
-				oldFreq = subBagArr[ndxSelectedProblem].getFrequency();
-				cout << endl 
-					<< "oldFreq: " << oldFreq << endl;
-				if(oldFreq > 1)
-				{
-					currSubTemplateNdx = subBagArr[ndxSelectedProblem].getSubTemplateNdx();
-					cout << "currSubTemplateNdx: " << currSubTemplateNdx << endl;
-					newFreq = oldFreq / 2;
-					s.getSubTemplateArr()[currSubTemplateNdx].setFrequency(newFreq);
-				}
-			} else
-			{
-				cout << "     Sorry, the correct answer is " << subBagArr[ndxSelectedProblem].getDifference()
-					<< "."
-					<< endl;
-				oldFreq = subBagArr[ndxSelectedProblem].getFrequency();
-				cout << endl 
-					<< "oldFreq: " << oldFreq << endl;
-				if(oldFreq <= 5)
-				{
+				if(tooLong)
+				{ 
+					cumWrong++;
+					oldFreq = subBagArr[ndxSelectedProblem].getFrequency();
+					cout << endl 
+						<< "oldFreq: " << oldFreq << endl;
 					currSubTemplateNdx = subBagArr[ndxSelectedProblem].getSubTemplateNdx();
 					cout << "currSubTemplateNdx: " << currSubTemplateNdx << endl;
 					newFreq = oldFreq * 2;
+					if(newFreq > 10)
+					{
+						newFreq = 10;
+					}
 					s.getSubTemplateArr()[currSubTemplateNdx].setFrequency(newFreq);
+					cout << endl
+					<< "     But you did not answer within " << s.getSubSpeed() << " seconds." << endl;
+					delayTimer = 0;
+					startTime = time(NULL);
+					while (delayTimer < 2)
+					{
+						endTime = time(NULL);
+						delayTimer = (endTime - startTime);
+					}
 				}
+				else
+				{
+					cumRight++;
+					oldFreq = subBagArr[ndxSelectedProblem].getFrequency();
+					cout << endl 
+						<< "oldFreq: " << oldFreq << endl;
+					if(oldFreq > 1)
+					{
+						currSubTemplateNdx = subBagArr[ndxSelectedProblem].getSubTemplateNdx();
+						cout << "currSubTemplateNdx: " << currSubTemplateNdx << endl;
+						newFreq = oldFreq / 2;
+						s.getSubTemplateArr()[currSubTemplateNdx].setFrequency(newFreq);
+					}
+				}
+			} else
+			{
+				cumWrong++;
+				cout << "     Sorry, the correct answer is " << subBagArr[ndxSelectedProblem].getDifference()
+					<< "."
+					<< endl;
+				delayTimer = 0;
+				startTime = time(NULL);
+				while (delayTimer < 4)
+				{
+					endTime = time(NULL);
+					delayTimer = (endTime - startTime);
+				}
+				oldFreq = subBagArr[ndxSelectedProblem].getFrequency();
+				cout << endl 
+					<< "oldFreq: " << oldFreq << endl;
+				currSubTemplateNdx = subBagArr[ndxSelectedProblem].getSubTemplateNdx();
+				cout << "currSubTemplateNdx: " << currSubTemplateNdx << endl;
+				newFreq = oldFreq * 2;
+				if(newFreq > 10)
+				{
+					newFreq = 10;
+				}
+				s.getSubTemplateArr()[currSubTemplateNdx].setFrequency(newFreq);
 			}
 		}
-		percentRight = cumRight / SET_SIZE;
+		percentRight = (cumRight * 100) / SET_SIZE;
 		cout << endl
-			<< "     You got " << cumRight << " out of " << SET_SIZE << "correct on this set"
+			<< "     You got " << cumRight << " out of " << SET_SIZE << " correct on this set" << endl
 			<< "     for a score of "  << percentRight << "%." << endl;
 		if(percentRight >= 96)
 		{
-			if(numSeconds = 2)
+			if(numSeconds == 2)
 			{
-				s.setSubLevel(level + 1);
-				s.setSubSpeed(6);
-				cout << "     Congratulations, you have moved up to minuends up to " << level + 1 << "." << endl
-					<< "     You will start this level with six seconds to answer each question." << endl << endl;
+				if(level == 100)
+				{
+					cout << endl
+						<< "     Congratulations.  You have completed successfully completed" << endl
+						<< "     the entire set of subtraction drills." << endl
+						<< endl
+						<< "     Press enter to return to the main menu.  ";
+					getchar();
+				}
+				else
+				{
+					s.setSubLevel(level + 1);
+					s.setSubSpeed(6);
+					cout << endl << "     Congratulations.  You have moved up to minuends up to " 
+						<< level + 1 << "." << endl
+						<< "     You will start this level with six seconds to answer each question." 
+						<< endl;
+				}
 			}
 			else
 			{
@@ -152,46 +219,39 @@ void subModule(Student & s)
 					if(numSeconds <= 4)
 					{
 						s.setSubSpeed(2);
-						cout << "     Congratulations.  Due to your very high accuracy, you will now have" << endl
-							<< "     two seconds to answer each question."  << endl << endl;
+						cout << endl 
+							<< "     Congratulations.  Due to your very high accuracy, you will now have" << endl
+							<< "     two seconds to answer each question."  << endl;
 					}
 					else
 					{
 						s.setSubSpeed(numSeconds - 2);
-						cout << "     Congratulations.  Due to your very high accuracy, you will now have " << endl
-							<< numSeconds - 2 << " to answer each question."  << endl << endl;
+						cout << endl 
+							<< "     Congratulations.  Due to your very high accuracy, you will now have "	
+							<< endl
+							<< "     " << numSeconds - 2 << " seconds to answer each question."  
+							<< endl;
 					}
 				}
 				else
 				{
-					s.setSubSpeed(numSeconds -1);
-					cout << "     Congratulations.  Due to your high accuracy, you will now have " << endl
-						<< numSeconds -1 << " to answer each question." << endl << endl;
+					s.setSubSpeed(s.getSubSpeed() - 1);
+					if(s.getSubSpeed() < 1)
+					{
+						s.setSubSpeed(1);
+					}
+					cout << endl 
+						<< "     Congratulations.  Due to your high accuracy, " << endl
+						<< "     you will now have " << numSeconds -1 << " seconds to answer each question." << endl;
 				}
 			}
 		}
-		cout << "     Would you like to do another set of " << SET_SIZE << " subtraction problems now (y or n)?  ";
+		cout << endl
+			<< "     Would you like to do another set of " << SET_SIZE << " subtraction problems now (y or n)?  ";
+		getline(cin, userInputStrob);
 		ss.clear();
 		ss << userInputStrob;
 		ss >> wantsAnotherSet;
 		cout << endl;
 	}
 }}}
-//--------------------------------------------------
-// void makeBag(Student s, int templatesUsed, SubTemplate * subBagArr, int & numProblems)
-// {{{
-// }}}
-//-------------------------------------------------- 
-
-			//--------------------------------------------------
-			// //debug
-			// for(int j = 0; j < numProblems; j++)
-			// {
-			// 	cout << "subBagArr[" << j << "].getMinuend(): " << subBagArr[j].getMinuend() << endl;
-			// 	cout << "subBagArr[" << j << "].getSubtrahend(): " << subBagArr[j].getSubtrahend() << endl;
-			// 	cout << "subBagArr[" << j << "].getDifference(); " << subBagArr[j].getDifference() << endl;
-			// 	cout << "subBagArr[" << j << "].getFrequency(); " << subBagArr[j].getFrequency() << endl;
-			// }
-			//-------------------------------------------------- 
-
-
