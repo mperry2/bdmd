@@ -424,7 +424,7 @@ class Student
 		{
 			divSpeed = ds;
 		}
-		void makeAddTemplateArr(Student & s)
+		/*void makeAddTemplateArr(Student & s)
 		{
 			int numUniqueProblems = (MAX_ADDEND + 1) * (MAX_ADDEND + 1);
 			addTemplateArr = new AddTemplate[numUniqueProblems];
@@ -442,6 +442,35 @@ class Student
 				}
 				int sa = l;
 				for(int fa=0;fa<l;fa++)
+				{
+					int s = fa + sa;
+					addTemplateArr[ndx].setFirstAddend(fa);
+					addTemplateArr[ndx].setSecondAddend(sa);
+					addTemplateArr[ndx].setSum(s);
+					ndx++;
+				}
+			}
+		}*/
+		void makeAddTemplateArr(Student & s)
+		{
+			int numUniqueProblems = (MAX_ADDEND + 1) * (MAX_ADDEND + 1);
+			addTemplateArr = new AddTemplate[numUniqueProblems];
+			int ndx = 0;
+			for(int l=0; l<=MAX_ADDEND;l++)
+			{
+				int fa;
+				int sa;
+				fa = l;
+				for(sa=0;sa<=l;sa++)
+				{
+					int s = fa + sa;
+					addTemplateArr[ndx].setFirstAddend(fa);
+					addTemplateArr[ndx].setSecondAddend(sa);
+					addTemplateArr[ndx].setSum(s);
+					ndx++;
+				}
+				sa = l;
+				for(fa=0;fa<l;fa++)
 				{
 					int s = fa + sa;
 					addTemplateArr[ndx].setFirstAddend(fa);
@@ -476,8 +505,10 @@ class Student
 			int ndx = 0;
 			for(int l=0; l<=MAX_FACTOR;l++)
 			{
-				int ff = l;
-				for(int sf=0;sf<=l;sf++)
+				int ff;
+				int sf;
+				ff = l;
+				for(sf=0;sf<=l;sf++)
 				{
 					int p = ff * sf;
 					mltTemplateArr[ndx].setFirstFactor(ff);
@@ -485,8 +516,8 @@ class Student
 					mltTemplateArr[ndx].setProduct(p);
 					ndx++;
 				}
-				int sf = l;
-				for(int ff=0;ff<l;ff++)
+				sf = l;
+				for(ff=0;ff<l;ff++)
 				{
 					int p = ff * sf;
 					mltTemplateArr[ndx].setFirstFactor(ff);

@@ -19,7 +19,6 @@ void fobState(fstream & fob)
 
 void printStudent(Student & s)
 {{{
-	int level;
 	// print data members of Student.h class
 	cout << endl
 		<< "s.name: " << s.getName() << endl
@@ -35,6 +34,7 @@ void printStudent(Student & s)
 	getchar();
 
 	//print template arrays
+	// int level;
 	//--------------------------------------------------
 	// cout << endl
 	// 	<< "addLevel: ";

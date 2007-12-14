@@ -21,6 +21,7 @@ void Student::readUserDat(fstream & userdatFob)
 	readStrObj = nameStrObj;
 	readStrObj += ".dat";
 	strcpy(readStr, readStrObj.c_str());
+	userdatFob.clear();
 	userdatFob.open(readStr, ios::in);
 	if(!userdatFob)
 	{
@@ -104,6 +105,7 @@ void Student::readUserDat(fstream & userdatFob)
 			userdatFob.getline(readStr, MAX_NAME + 1, '~');
 			mltTemplateArr[i].setObjCnt(atoi(readStr));
 		}
+			userdatFob.clear();
 			userdatFob.close();
 		if(!userdatFob)
 		{
@@ -125,6 +127,7 @@ void Student::writeUserDat(fstream & userdatFob)
 	writeStrObj = nameStrObj;
 	writeStrObj += ".dat";
 	strcpy(writeStr, writeStrObj.c_str());
+	userdatFob.clear();
 	userdatFob.open(writeStr, ios::out);
 	userdatFob << name << '~'
 		<< addLevel << '~'
@@ -169,6 +172,7 @@ void Student::writeUserDat(fstream & userdatFob)
 			<< mltTemplateArr[i].getMltTemplateNdx() << '~'
 			<< mltTemplateArr[i].getObjCnt() << '~';
 	}
+	userdatFob.clear();
 	userdatFob.close();
 	if(!userdatFob)
 	{

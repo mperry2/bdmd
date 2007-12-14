@@ -10,7 +10,7 @@
 using namespace std;
 
 void subModule(Student & s)
-{{{
+{
 	SubTemplate * subBagArr;
 	int templatesUsed;
 	int numProblems;
@@ -30,7 +30,7 @@ void subModule(Student & s)
 	int currSubTemplateNdx;
 	time_t startTime;
 	time_t endTime;
-	float timeElapsed;
+	time_t timeElapsed;
 	int numSeconds;
 	int cumRight;
 	int cumWrong;
@@ -109,9 +109,9 @@ void subModule(Student & s)
 			//cout << "ndxSelectedProblem: " << ndxSelectedProblem << endl;
 			startTime = time(NULL);
 			//cout << endl << endl << "startTime: " << startTime << endl;
-			//cin.sync(); This doesn't seem to flush cin.
-			//cin.flush();
-			cin.clear();
+			//cin.sync(); // This doesn't seem to flush cin on lin or win.
+			// cin.flush(); // Compile err under win; no help under lin.
+			//cin.clear(); // This doesn't help, either.
 			cout << endl
 				<< "     " << subBagArr[ndxSelectedProblem].getMinuend() << "  -  "
 				<< subBagArr[ndxSelectedProblem].getSubtrahend() << "  =  ";
@@ -273,4 +273,4 @@ void subModule(Student & s)
 		ss >> wantsAnotherSet;
 		cout << endl;
 	}
-}}}
+}
