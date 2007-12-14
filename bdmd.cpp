@@ -95,7 +95,7 @@ void loginUser(Student & s, fstream & userdatFob)
 	userFileNameStrob = userNameStrob + ".dat";
 	strcpy(userFileNameStr, userFileNameStrob.c_str());
 	userdatFob.open(userFileNameStr, ios::in);
-	if (userdatFob)
+	if (userdatFob.good())
 	{
 		userdatFob.close();
 		s.readUserDat(userdatFob);
