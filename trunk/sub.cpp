@@ -22,6 +22,7 @@ void subModule(Student & s)
 	int difference;
 	int frequency;
 	string userInputStrob;
+	string junkString;
 	stringstream ss;
 	int userAnswer;
 	int oldFreq;
@@ -36,7 +37,7 @@ void subModule(Student & s)
 	int cumWrong;
 	int cumProblems;
 	int percentRight;
-	const int SET_SIZE = 10;
+	const int SET_SIZE = 20;
 	string wantsAnotherSet = "y";
 	int tooLong;
 	int delayTimer;
@@ -51,12 +52,6 @@ void subModule(Student & s)
 		cumRight = 0;
 		cumWrong = 0;
 		cumProblems = 0;
-		//--------------------------------------------------
-		// //debug
-		// cout << endl
-		// 	<< "level: " << level << endl
-		// 	<< "numSeconds: " << numSeconds << endl;
-		//-------------------------------------------------- 
 		templatesUsed = (((level + 1) * (level + 1)) / 2) + (level / 2) + 1;
 
 
@@ -67,18 +62,7 @@ void subModule(Student & s)
 			for(int i = 0; i < templatesUsed; i++)
 			{
 				numProblems += s.getSubTemplateArr()[i].getFrequency();
-				//--------------------------------------------------
-				// cout << endl
-				// 	<< "s.getSubTemplateArr()[" << i << "].getFrequency(): " 
-				// 	<< s.getSubTemplateArr()[i].getFrequency();
-				//-------------------------------------------------- 
 			}
-			//--------------------------------------------------
-			// //debug
-			// cout << endl
-			// 	<< "numProblems: " << numProblems << endl
-			// 	<< endl;
-			//-------------------------------------------------- 
 			delete [] subBagArr;
 			subBagArr = new SubTemplate[numProblems];
 			int ndx = 0;
@@ -100,30 +84,21 @@ void subModule(Student & s)
 				}
 				ndx += freq;
 			}
-			//--------------------------------------------------
-			// cout << endl
-			// 	<< "templatesUsed: " << templatesUsed << endl;
-			// cout << "numProblems: " << numProblems << endl;
-			//-------------------------------------------------- 
 			ndxSelectedProblem = rand() % numProblems;
-			//cout << "ndxSelectedProblem: " << ndxSelectedProblem << endl;
 			startTime = time(NULL);
-			//cout << endl << endl << "startTime: " << startTime << endl;
-			//cin.sync(); // This doesn't seem to flush cin on lin or win.
-			// cin.flush(); // Compile err under win; no help under lin.
-			//cin.clear(); // This doesn't help, either.
 			cout << endl
 				<< "     " << subBagArr[ndxSelectedProblem].getMinuend() << "  -  "
 				<< subBagArr[ndxSelectedProblem].getSubtrahend() << "  =  ";
 			getline(cin, userInputStrob);
 			endTime = time(NULL);
-			//cout << "endTime: " << endTime << endl;
 			timeElapsed = (endTime - startTime);
-			//cout << "timeElapsed: " << timeElapsed << endl;
 			if(timeElapsed > s.getSubSpeed())
 			{
 				tooLong = 1;
 			}
+			ss.clear(); // prepare ss for input
+			ss >> junkString;
+			junkString = "";
 			ss.clear();
 			ss << userInputStrob;
 			ss >> userAnswer;
@@ -136,12 +111,7 @@ void subModule(Student & s)
 				{ 
 					cumWrong++;
 					oldFreq = subBagArr[ndxSelectedProblem].getFrequency();
-					//--------------------------------------------------
-					// cout << endl 
-					// 	<< "oldFreq: " << oldFreq << endl;
-					//-------------------------------------------------- 
 					currSubTemplateNdx = subBagArr[ndxSelectedProblem].getSubTemplateNdx();
-					//cout << "currSubTemplateNdx: " << currSubTemplateNdx << endl;
 					newFreq = oldFreq * 2;
 					if(newFreq > 10)
 					{
@@ -162,14 +132,9 @@ void subModule(Student & s)
 				{
 					cumRight++;
 					oldFreq = subBagArr[ndxSelectedProblem].getFrequency();
-					//--------------------------------------------------
-					// cout << endl 
-					// 	<< "oldFreq: " << oldFreq << endl;
-					//-------------------------------------------------- 
 					if(oldFreq > 1)
 					{
 						currSubTemplateNdx = subBagArr[ndxSelectedProblem].getSubTemplateNdx();
-						//cout << "currSubTemplateNdx: " << currSubTemplateNdx << endl;
 						newFreq = oldFreq / 2;
 						s.getSubTemplateArr()[currSubTemplateNdx].setFrequency(newFreq);
 					}
@@ -189,12 +154,7 @@ void subModule(Student & s)
 					delayTimer = (endTime - startTime);
 				}
 				oldFreq = subBagArr[ndxSelectedProblem].getFrequency();
-				//--------------------------------------------------
-				// cout << endl 
-				// 	<< "oldFreq: " << oldFreq << endl;
-				//-------------------------------------------------- 
 				currSubTemplateNdx = subBagArr[ndxSelectedProblem].getSubTemplateNdx();
-				//cout << "currSubTemplateNdx: " << currSubTemplateNdx << endl;
 				newFreq = oldFreq * 2;
 				if(newFreq > 10)
 				{
@@ -207,7 +167,7 @@ void subModule(Student & s)
 		cout << endl
 			<< "     You got " << cumRight << " out of " << SET_SIZE 
 			<< " correct on this set for a score of "  << percentRight << "%." << endl;
-		if(percentRight >= 96)
+		if(percentRight >= 95)
 		{
 			if(numSeconds == 2)
 			{

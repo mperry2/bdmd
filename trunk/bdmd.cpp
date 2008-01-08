@@ -46,7 +46,6 @@ void displayHelp();
 void printAddTemplateArr(Student & s);
 void printSubTemplateArr(Student & s);
 void printMltTemplateArr(Student & s);
-//void printStudent(Student & s);
 void writeUserDat(fstream & userdatFob);
 
 int main()
@@ -128,7 +127,7 @@ void loginUser(Student & s, fstream & userdatFob)
 			<< "     which uses addends of 0-2, and work your way up, but you" << endl
 			<< "     may choose a maximum addend of from 0 to 100."  << endl
 			<<  endl;
-		cout << "     Do you want to start with the default maxumum" << endl
+		cout << "     Do you want to start with the default maximum" << endl
 			<< "     addend of 2 (y or n)?  ";
 		getline(cin, inputStrObj);
 		if(inputStrObj == "n")
@@ -171,7 +170,7 @@ void loginUser(Student & s, fstream & userdatFob)
 			<< "     0-4, and work your way up, but you" << endl
 			<< "     may choose a maximum minuend of from 0 to 200."  << endl		
 			<<  endl;
-		cout << "     Do you want to start with the default maxumum" << endl
+		cout << "     Do you want to start with the default maximum" << endl
 			<< "     minuend of 4 (y or n)?  ";
 		getline(cin, inputStrObj);
 		if(inputStrObj == "n")
@@ -211,7 +210,7 @@ void loginUser(Student & s, fstream & userdatFob)
 			<< "     0-2, and work your way up, but you" << endl
 			<< "     may choose a maximum factor of from 0 to 200."  << endl		
 			<<  endl;
-		cout << "     Do you want to start with the default maxumum" << endl
+		cout << "     Do you want to start with the default maximum" << endl
 			<< "     factor of 2 (y or n)?  ";
 		getline(cin, inputStrObj);
 		if(inputStrObj == "n")
@@ -235,7 +234,7 @@ void loginUser(Student & s, fstream & userdatFob)
 		{
 			cout << endl
 				<< "     Good choice.  You will start with the default" << endl
-				<< "    maximum factor of 2." << endl
+				<< "     maximum factor of 2." << endl
 				<< endl
 				<< "     Press enter to continue.  ";
 			getchar();
@@ -324,7 +323,8 @@ void displayReport(Student & s)
 	cout << endl << endl;
 	cout << "\t                BIG DADDY'S MATH DRILLS" << endl << endl;
 	cout << "\t                    PROGRESS REPORT" << endl << endl << endl;
-	cout 	<< "\tAddition Drill" << endl << endl
+	cout	<< "\tReport for: " << s.getName() << endl << endl << endl	
+			<< "\tAddition Drill" << endl << endl
 			<< "\t   Current Level: addends up to " << s.getAddLevel() << "." << endl
 			<< "\t   Current time to answer: " << s.getAddSpeed() << " seconds." << endl << endl << endl
 			<< "\tSubtraction Drill" << endl << endl

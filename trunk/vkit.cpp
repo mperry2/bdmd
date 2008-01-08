@@ -1,6 +1,7 @@
 #include "vkit.h"
 #include <fstream>
 #include <iostream>
+#include <sstream>
 using namespace std;
 
 // [debugging]
@@ -15,6 +16,30 @@ void fobState(fstream & fob)
 	cout << "good bit: " << fob.good() << endl;
 	cout << endl;
 	fob.clear();
+}}}
+
+// prints sstream status bits
+void stringstreamState(stringstream & ss) 
+{{{
+	cout << endl;
+	cout << "eof bit: " << ss.eof() << endl;
+	cout << "fail bit: " << ss.fail() << endl;
+	cout << "bad bit: " << ss.bad() << endl;
+	cout << "good bit: " << ss.good() << endl;
+	cout << endl;
+	ss.clear();
+}}}
+
+// prints istream status bits
+void istreamState(istream & is) 
+{{{
+	cout << endl;
+	cout << "eof bit: " << is.eof() << endl;
+	cout << "fail bit: " << is.fail() << endl;
+	cout << "bad bit: " << is.bad() << endl;
+	cout << "good bit: " << is.good() << endl;
+	cout << endl;
+	is.clear();
 }}}
 
 void printStudent(Student & s)
@@ -82,6 +107,27 @@ void printAddTemplateArr(Student & s)
 	}
 }}}
 
+void printAddBagArr(Student & s, AddTemplate * addBagArr)
+{{{
+	int numUsed = (s.getAddLevel() + 1) * (s.getAddLevel() + 1);
+	int ndx = 0;
+	for(int i=0;i<numUsed;i++)
+	{
+		cout << endl
+			<< "new template" << endl;
+		int freq = s.getAddTemplateArr()[i].getFrequency();
+		for(int j = 0; j < freq; j++)
+		{
+			int firstAddend = s.getAddTemplateArr()[i].getFirstAddend();
+			int secondAddend = s.getAddTemplateArr()[i].getSecondAddend();
+			int sum = s.getAddTemplateArr()[i].getSum();
+			cout <<	addBagArr[ndx + j].getFirstAddend() << " + "
+				<< 	addBagArr[ndx + j].getSecondAddend() << " = " 
+				<< 	addBagArr[ndx + j].getSum() << endl;
+		}
+		ndx += freq;
+	}
+}}}
 void printSubTemplateArr(Student & s)
 {{{
 	int numUsed = (((s.getSubLevel() + 1) * (s.getSubLevel() + 1)) / 2) + (s.getSubLevel() / 2) + 1;
@@ -106,7 +152,7 @@ void printSubTemplateArr(Student & s)
 
 void printMltTemplateArr(Student & s)
 {{{
-	int numUsed = (s.getMltLevel() + 1) * (s.getMltLevel() + 1);
+	int numUsed = (s.getMltLevel() + 1) * (s.getMltLevel() + 1); 
 	for(int i=0;i<numUsed;i++)
 	{
 		cout << endl 
