@@ -41,6 +41,7 @@ unsigned short getChoice();
 void addModule(Student & s);
 void subModule(Student & s);
 void mltModule(Student & s);
+void divModule(Student & s);
 void displayReport(Student & s);
 void displayHelp();
 void printAddTemplateArr(Student & s);
@@ -56,7 +57,8 @@ int main()
 	// make template arrays
 	s.makeAddTemplateArr(s);
 	s.makeSubTemplateArr(s);
-	s.makeMltTemplateArr(s);	
+	s.makeMltTemplateArr(s);
+	s.makeDivTemplateArr(s);
 
 	loginUser(s, userdatFob);
 	displayMainMenu(s, userdatFob);	
@@ -159,11 +161,11 @@ void loginUser(Student & s, fstream & userdatFob)
 		cout << endl
 			<< "     In the subtraction drill, you practice" << endl
 			<< "     problems in which you subtract a number" << endl
-			<< "     called a 'subrahend' from another number" << endl
+			<< "     called a 'subtrahend' from another number" << endl
 			<< "     called a 'minuend.'  In this drill, the" << endl
 			<< "     minuend will always be equal to or larger" << endl
 			<< "     than the subtrahend.  As you gain speed" << endl
-			<< "     accuracy, the maximimum size of the" << endl
+			<< "     and accuracy, the maximimum size of the" << endl
 			<< "     minuends you are given is automatically" << endl
 			<< "     increased.  We recommend that you start" << endl
 			<< "     with the default which uses minuends of" << endl
@@ -184,8 +186,8 @@ void loginUser(Student & s, fstream & userdatFob)
 			ss >> levelChosen;
 			s.setSubLevel(levelChosen);
 			cout << endl
-				<< "     You have chosen to start by with" << endl
-				<< "     minuends up to " << levelChosen << "." << endl
+				<< "     You have chosen to start subtracting" << endl
+				<< "     from minuends of up to " << levelChosen << "." << endl
 				<< endl
 				<< "     Press enter to continue.  ";
 			getchar();
@@ -202,8 +204,8 @@ void loginUser(Student & s, fstream & userdatFob)
 		cout << endl
 			<< "     In the multiplication drill, you practice" << endl
 			<< "     problems in which you multiply two numbers" << endl
-			<< "     'factors.  As you gain speed" << endl
-			<< "     accuracy, the maximimum size of the" << endl
+			<< "     called 'factors.'  As you gain speed" << endl
+			<< "     and accuracy, the maximimum size of the" << endl
 			<< "     factors you are given is automatically" << endl
 			<< "     increased.  We recommend that you start" << endl
 			<< "     with the default, which uses factors of" << endl
@@ -225,7 +227,7 @@ void loginUser(Student & s, fstream & userdatFob)
 			s.setMltLevel(levelChosen);
 			cout << endl
 				<< "     You have chosen to start by with" << endl
-				<< "     minuends up to " << levelChosen << "." << endl
+				<< "     factors up to " << levelChosen << "." << endl
 				<< endl
 				<< "     Press enter to continue.  ";
 			getchar();
@@ -237,6 +239,50 @@ void loginUser(Student & s, fstream & userdatFob)
 				<< "     maximum factor of 2." << endl
 				<< endl
 				<< "     Press enter to continue.  ";
+			getchar();
+		}
+		cout << endl
+			<< "     In the division drill, you practice" << endl
+			<< "     problems in which you divide a numerator by" << endl
+			<< "     a denominator to get a quotient.  As you gain" << endl
+			<< "     speed and accuracy, the maximimum size of the" << endl
+			<< "     numbers you are given is automatically" << endl
+			<< "     increased.  We recommend that you start" << endl
+			<< "     with the default, which uses numerators" << endl
+			<< "     from 0-2, and denominators of 1-2, and work" << endl
+			<< "     your way up, but you may choose a maximum" << endl
+			<< "     for numerators and denominators" << endl
+			<< "     of from 1 to 200."  << endl		
+			<<  endl;
+		cout << "     Do you want to start with the default maximum" << endl
+			<< "     for numerators and denominators of 2 (y or n)?  ";
+		getline(cin, inputStrObj);
+		if(inputStrObj == "n")
+		{
+			cout << endl
+				<< "     What is the maximum numerator or denominator" << endl
+				<< "     you want to use to begin with?  ";
+			getline(cin, inputStrObj);
+			ss.clear();
+			ss << inputStrObj;
+			ss >> levelChosen;
+			s.setDivLevel(levelChosen);
+			cout << endl
+				<< "     You have chosen to start by dividing" << endl
+				<< "     with numerators and denominators up to " << levelChosen << "." << endl
+				<< endl
+				<< "     Press enter to continue.  ";
+			getchar();
+		}
+		else
+		{
+			cout << endl
+				<< "     Good choice.  You will start with the default" << endl
+				<< "     maximum for numerators and denominators of 2." << endl
+				<< endl
+				<< "     Press enter to continue.  ";
+			//debug
+			cout << "divLevel: " << s.getDivLevel() << endl;
 			getchar();
 		}
 	}
@@ -268,14 +314,19 @@ void displayMainMenu(Student & s, fstream & userdatFob)
 		if(mainMenu == 4)
 		{
 			clearScreen();
+			divModule(s);
+		}
+		if(mainMenu == 5)
+		{
+			clearScreen();
 			displayReport(s);
 		}
-		if (mainMenu == 5)
+		if (mainMenu == 6)
 		{
 			clearScreen();
 			displayHelp();
 		}
-		if(mainMenu == 6)
+		if(mainMenu == 7)
 		{
 			s.writeUserDat(userdatFob);
 			keepGoing = 0;
@@ -297,16 +348,17 @@ unsigned short getChoice()
 	cout 	<< "\t1 Do Addition Drill" << endl 
 			<< "\t2 Do Subtraction Drill" << endl
 			<< "\t3 Do Multiplication Drill" << endl
-			<< "\t4 Progress Report" << endl
-			<< "\t5 Help" << endl
-			<< "\t6 Quit" << endl
+			<< "\t4 Do Division Drill" << endl
+			<< "\t5 Progress Report" << endl
+			<< "\t6 Help" << endl
+			<< "\t7 Quit" << endl
 			<< endl 
 			<< "\tPlease enter the number corresponding" << endl
 			<< "\tto your choice or q to quit: ";
 		getline(cin, inputStrObj);
 		if(inputStrObj == "q")
 		{
-			userInput = 6;
+			userInput = 7;
 		}
 		else
 		{
@@ -332,7 +384,10 @@ void displayReport(Student & s)
 			<< "\t   Current time to answer: " << s.getSubSpeed() << " seconds." << endl << endl << endl
 			<< "\tMultiplication Drill" << endl << endl
 			<< "\t   Current Level: factors up to " << s.getMltLevel() << endl
-			<< "\t   Current time to answer: " << s.getMltSpeed() << " seconds." << endl
+			<< "\t   Current time to answer: " << s.getMltSpeed() << " seconds." << endl << endl << endl
+			<< "\tDivision Drill" << endl << endl
+			<< "\t   Current Level: numerators and denominators up to " << s.getDivLevel() << endl
+			<< "\t   Current time to answer: " << s.getDivSpeed() << " seconds." << endl
 			<< endl  << endl
 			<< "\tPress enter to return to main menu.  ";
 	getchar();
@@ -342,21 +397,21 @@ void displayHelp()
 {{{
 	cout << "Introduction" << endl << endl
 
-	<< "Big Daddy's Math Drills is a simple, effective, free, opensource program for drilling basic addition, subtraction, and multiplication facts.  Compiled binary files are available for Windows XP and Linux compatible systems." << endl << endl
+	<< "Big Daddy's Math Drills is a simple, effective, free, opensource program for drilling basic addition, subtraction, multiplication, and division facts.  Compiled binary files are available for Windows XP and Linux compatible systems." << endl << endl
 
 	<< "Installing and Uninstalling" << endl << endl
 
-	<< "For Linux and Windows users, just put the executable binary file and put it in a folder by itself where the user has read, write, and execute permissions.  There are no hooks into the operating system, so no worries.  To uninstall both program and data, delete the folder." << endl << endl
+	<< "For Linux and Windows users, just put the executable binary file in a folder by itself where the user has read, write, and execute permissions.  There are no hooks into the operating system, so no worries.  To uninstall both program and data, delete the folder." << endl << endl
 
 	<< "Operation" << endl << endl
 
 	<< "Just start the program and follow the prompts.  The program works like flash cards, but it's more effective because:" << endl << endl
 
-	<< "1. The program starts out easy, a limited set of small numbers first.  It progressively decreases the frequency of drill for problems that you answer correctly, and increases the frequency of drill for problems you answer wrong." << endl << endl
+	<< "1. The program starts out easy, with a limited set of small numbers first.  It progressively decreases the frequency of drill for problems that you answer correctly, and increases the frequency of drill for problems you answer wrong." << endl << endl
 
-	<< "2. As you gain in accuracy at a given level, the programe reduces the amount of time allowed for each answer." << endl << endl
+	<< "2. As you gain in accuracy at a given level, the program reduces the amount of time allowed for each answer." << endl << endl
 
-	<< "3. When you have mastered the problems at a lower level, the program automatically moves you up to the next level, where you again start out with more time to answer each question.  The problems from old levels still appear from time to time, to make sure you don't forget them, but you get more intensive drill in the newer more unfamiliar material." << endl << endl
+	<< "3. When you have mastered the problems at a lower level, the program automatically moves you up to the next level, where you again start out with more time to answer each question.  The problems from old levels still appear from time to time, but you get more intensive drill in the newer material." << endl << endl
 
 	<< "4. When you get tired of doing one kind of problem, you can work on another module." << endl << endl
 

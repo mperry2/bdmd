@@ -13,6 +13,7 @@ void printStudent(Student & s);
 void printAddTemplateArr(Student & s);
 void printSubTemplateArr(Student & s);
 void printMltTemplateArr(Student & s);
+void printDivTemplateArr(Student & s);
 void printAddBagArr(Student & s, AddTemplate * addBagArr);
 
 // utility

@@ -17,6 +17,7 @@ void Student::readUserDat(fstream & userdatFob)
 	int numUniqueAddTemplates;
 	int numUniqueSubTemplates;
 	int numUniqueMltTemplates;
+	int numUniqueDivTemplates;
 	nameStrObj = getName();
 	readStrObj = nameStrObj;
 	readStrObj += ".dat";
@@ -90,7 +91,7 @@ void Student::readUserDat(fstream & userdatFob)
 			subTemplateArr[i].setObjCnt(atoi(readStr));
 		}
 		numUniqueMltTemplates = (MAX_FACTOR + 1) * (MAX_FACTOR + 1);
-		for(int i=0;i<mltTemplateArr[0].getObjCnt();i++)
+		for(int i=0;i<numUniqueMltTemplates;i++)
 		{
 			userdatFob.getline(readStr, MAX_NAME + 1, '~');
 			mltTemplateArr[i].setFrequency(atoi(readStr));
@@ -104,6 +105,22 @@ void Student::readUserDat(fstream & userdatFob)
 			mltTemplateArr[i].setMltTemplateNdx(atoi(readStr));
 			userdatFob.getline(readStr, MAX_NAME + 1, '~');
 			mltTemplateArr[i].setObjCnt(atoi(readStr));
+		}
+		numUniqueDivTemplates = (MAX_FACTOR + 1) * (MAX_FACTOR); // no division by zero
+		for(int i=0;i<numUniqueDivTemplates;i++)
+		{
+			userdatFob.getline(readStr, MAX_NAME + 1, '~');
+			divTemplateArr[i].setFrequency(atoi(readStr));
+			userdatFob.getline(readStr, MAX_NAME + 1, '~');
+			divTemplateArr[i].setFirstFactor(atoi(readStr));
+			userdatFob.getline(readStr, MAX_NAME + 1, '~');
+			divTemplateArr[i].setSecondFactor(atoi(readStr));
+			userdatFob.getline(readStr, MAX_NAME + 1, '~');
+			divTemplateArr[i].setProduct(atoi(readStr));
+			userdatFob.getline(readStr, MAX_NAME + 1, '~');
+			divTemplateArr[i].setDivTemplateNdx(atoi(readStr));
+			userdatFob.getline(readStr, MAX_NAME + 1, '~');
+			divTemplateArr[i].setObjCnt(atoi(readStr));
 		}
 			userdatFob.clear();
 			userdatFob.close();
@@ -122,6 +139,7 @@ void Student::writeUserDat(fstream & userdatFob)
 	int numUniqueAddTemplates;
 	int numUniqueSubTemplates;
 	int numUniqueMltTemplates;
+	int numUniqueDivTemplates;
 	
 	nameStrObj = getName();
 	writeStrObj = nameStrObj;
@@ -163,7 +181,7 @@ void Student::writeUserDat(fstream & userdatFob)
 			<< subTemplateArr[i].getObjCnt() << '~';
 	}
 	numUniqueMltTemplates = (MAX_FACTOR + 1) * (MAX_FACTOR + 1);
-	for(int i=0;i<mltTemplateArr[0].getObjCnt();i++)
+	for(int i=0;i<numUniqueMltTemplates;i++)
 	{
 		userdatFob << mltTemplateArr[i].getFrequency() << '~'
 			<< mltTemplateArr[i].getFirstFactor() << '~'
@@ -171,6 +189,16 @@ void Student::writeUserDat(fstream & userdatFob)
 			<< mltTemplateArr[i].getProduct() << '~'
 			<< mltTemplateArr[i].getMltTemplateNdx() << '~'
 			<< mltTemplateArr[i].getObjCnt() << '~';
+	}
+	numUniqueDivTemplates = (MAX_FACTOR + 1) * (MAX_FACTOR);
+	for(int i=0;i<numUniqueDivTemplates;i++)
+	{
+		userdatFob << divTemplateArr[i].getFrequency() << '~'
+			<< divTemplateArr[i].getFirstFactor() << '~'
+			<< divTemplateArr[i].getSecondFactor() << '~'
+			<< divTemplateArr[i].getProduct() << '~'
+			<< divTemplateArr[i].getDivTemplateNdx() << '~'
+			<< divTemplateArr[i].getObjCnt() << '~';
 	}
 	userdatFob.clear();
 	userdatFob.close();

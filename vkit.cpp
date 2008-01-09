@@ -1,4 +1,5 @@
 #include "vkit.h"
+#include "Student.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -59,30 +60,10 @@ void printStudent(Student & s)
 	getchar();
 
 	//print template arrays
-	// int level;
-	//--------------------------------------------------
-	// cout << endl
-	// 	<< "addLevel: ";
-	// cin >> level;
-	// s.setAddLevel(level);		
-	//-------------------------------------------------- 
 	printAddTemplateArr(s);
-
-	//--------------------------------------------------
-	// cout << endl
-	// 	<< "subLevel: ";
-	// cin >> level;
-	// s.setSubLevel(level);		
-	//-------------------------------------------------- 
 	printSubTemplateArr(s);
-	
-	//--------------------------------------------------
-	// cout << endl
-	// 	<< "mltLevel: ";
-	// cin >> level;
-	// s.setMltLevel(level);		
-	//-------------------------------------------------- 
 	printMltTemplateArr(s);
+	printDivTemplateArr(s);
 }}}
 
 void printAddTemplateArr(Student & s)
@@ -107,27 +88,6 @@ void printAddTemplateArr(Student & s)
 	}
 }}}
 
-void printAddBagArr(Student & s, AddTemplate * addBagArr)
-{{{
-	int numUsed = (s.getAddLevel() + 1) * (s.getAddLevel() + 1);
-	int ndx = 0;
-	for(int i=0;i<numUsed;i++)
-	{
-		cout << endl
-			<< "new template" << endl;
-		int freq = s.getAddTemplateArr()[i].getFrequency();
-		for(int j = 0; j < freq; j++)
-		{
-			int firstAddend = s.getAddTemplateArr()[i].getFirstAddend();
-			int secondAddend = s.getAddTemplateArr()[i].getSecondAddend();
-			int sum = s.getAddTemplateArr()[i].getSum();
-			cout <<	addBagArr[ndx + j].getFirstAddend() << " + "
-				<< 	addBagArr[ndx + j].getSecondAddend() << " = " 
-				<< 	addBagArr[ndx + j].getSum() << endl;
-		}
-		ndx += freq;
-	}
-}}}
 void printSubTemplateArr(Student & s)
 {{{
 	int numUsed = (((s.getSubLevel() + 1) * (s.getSubLevel() + 1)) / 2) + (s.getSubLevel() / 2) + 1;
@@ -157,8 +117,8 @@ void printMltTemplateArr(Student & s)
 	{
 		cout << endl 
 			<< "s.getMltTemplateArr()[" << i << "].getFrequency(): " 
-			<< s.getMltTemplateArr()[i].getFrequency()
-			<< "s.mltTemplateArr[" << i << "].firstFactor: " 
+			<< s.getMltTemplateArr()[i].getFrequency() << endl
+			<< "s.mltTemplateArr[" << i << "].firstFactor: "
 			<< s.getMltTemplateArr()[i].getFirstFactor() << endl
 			<< "s.mltTemplateArr[" << i << "].secondFactor: " 
 			<< s.getMltTemplateArr()[i].getSecondFactor() << endl
@@ -170,6 +130,50 @@ void printMltTemplateArr(Student & s)
 			<< s.getMltTemplateArr()[i].getMltTemplateNdx() << endl;
 	}
 }}}
+
+void printDivTemplateArr(Student & s)
+{{{
+	int numUsed = (s.getDivLevel() + 1) * s.getDivLevel(); 
+	for(int i=0;i<numUsed;i++)
+	{
+		cout << endl 
+			<< "s.getDivTemplateArr()[" << i << "].getFrequency(): " 
+			<< s.getDivTemplateArr()[i].getFrequency() << endl
+			<< "s.divTemplateArr[" << i << "].firstFactor: "
+			<< s.getDivTemplateArr()[i].getFirstFactor() << endl
+			<< "s.divTemplateArr[" << i << "].secondFactor: " 
+			<< s.getDivTemplateArr()[i].getSecondFactor() << endl
+			<< "s.divTemplateArr[" << i << "].product: "
+			<< s.getDivTemplateArr()[i].getProduct() << endl
+			<< "s.divTemplateArr[" << i << "].objCnt: " 
+			<< s.getDivTemplateArr()[i].getObjCnt()  << endl
+			<< "s.divTemplateArr[" << i << "].divTemplateNdx: " 
+			<< s.getDivTemplateArr()[i].getDivTemplateNdx() << endl;
+	}
+}}}
+
+void printAddBagArr(Student & s, AddTemplate * addBagArr)
+{{{
+	int numUsed = (s.getAddLevel() + 1) * (s.getAddLevel() + 1);
+	int ndx = 0;
+	for(int i=0;i<numUsed;i++)
+	{
+		cout << endl
+			<< "new template" << endl;
+		int freq = s.getAddTemplateArr()[i].getFrequency();
+		for(int j = 0; j < freq; j++)
+		{
+			int firstAddend = s.getAddTemplateArr()[i].getFirstAddend();
+			int secondAddend = s.getAddTemplateArr()[i].getSecondAddend();
+			int sum = s.getAddTemplateArr()[i].getSum();
+			cout <<	addBagArr[ndx + j].getFirstAddend() << " + "
+				<< 	addBagArr[ndx + j].getSecondAddend() << " = " 
+				<< 	addBagArr[ndx + j].getSum() << endl;
+		}
+		ndx += freq;
+	}
+}}}
+
 // [utility]
 
 // clears screen under Win and Lin

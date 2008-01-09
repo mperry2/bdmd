@@ -29,10 +29,15 @@ class SubTemplate;
 class MltTemplate;
 class DivTemplate;
 
+//debug
 const int MAX_ADDEND = 100;
+//const int MAX_ADDEND = 2;
 const int MAX_MINUEND = 100;
+//const int MAX_MINUEND = 2;
 const int MAX_FACTOR = 20;
+//const int MAX_FACTOR = 2;
 const int MAX_NUMERATOR = 400;
+//const int MAX_NUMERATOR = 2;
 const int MAX_NAME = 40;
 
 class ProblemTemplate
@@ -258,27 +263,95 @@ class MltTemplate : public ProblemTemplate
 class DivTemplate : public ProblemTemplate
 {
 	protected:
+		int firstFactor;
+		int secondFactor;
+		int product;
+		int divTemplateNdx;
 		static int objCnt;
-		int numerator;
-		int denominator;
-		int quotient;
 	public:
 		DivTemplate()
 		{
 			objCnt++;
-			numerator = -1;
-			denominator = 500;
-			quotient = numerator / denominator;
+			firstFactor = -1;
+			secondFactor = 500;
+			product = firstFactor * secondFactor;
+			divTemplateNdx = objCnt - 1;
 		}
-
-		DivTemplate(int n, int d)
+		DivTemplate(int ff, int sf)
 		{
 			objCnt++;
-			numerator = n;
-			denominator = d;
-			quotient = numerator / denominator;
+			firstFactor = ff;
+			secondFactor = sf;
+			product = firstFactor * secondFactor;
+			divTemplateNdx = objCnt - 1;
+		}
+		int getFirstFactor()
+		{
+			return firstFactor;
+		}
+		int getSecondFactor()
+		{
+			return secondFactor;
+		}
+		int getProduct()
+		{
+			return product;
+		}
+		int getDivTemplateNdx()
+		{
+			return divTemplateNdx;
+		}
+		int getObjCnt()
+		{
+			return objCnt;
+		}
+		void setFirstFactor(int ff)
+		{
+			firstFactor = ff;
+		}
+		void setSecondFactor(int sf)
+		{
+			secondFactor = sf;
+		}
+		void setProduct(int p)
+		{
+			product = p;
+		}
+		void setDivTemplateNdx(int n)
+		{
+			divTemplateNdx = n;
+		}
+		void setObjCnt(int o)
+		{
+			objCnt = o;
 		}
 };
+//--------------------------------------------------
+// class DivTemplate : public ProblemTemplate
+// {
+// 	protected:
+// 		static int objCnt;
+// 		int numerator;
+// 		int denominator;
+// 		int quotient;
+// 	public:
+// 		DivTemplate()
+// 		{
+// 			objCnt++;
+// 			numerator = -1;
+// 			denominator = 500;
+// 			quotient = numerator / denominator;
+// 		}
+// 
+// 		DivTemplate(int n, int d)
+// 		{
+// 			objCnt++;
+// 			numerator = n;
+// 			denominator = d;
+// 			quotient = numerator / denominator;
+// 		}
+// };
+//-------------------------------------------------- 
 
 class Student
 {
@@ -310,14 +383,14 @@ class Student
 			prevSubLevel = 0;
 			mltLevel = 2;
 			prevMltLevel = 0;
-			divLevel = 4;
+			divLevel = 2;
 			prevDivLevel = 0;
 			addSpeed = 6;
 			subSpeed = 6;
 			mltSpeed = 6;
 			divSpeed = 6;
 		}
-		Student(string ns, int al = 2, int sl = 4, int ml = 2, int dl = 4, int as = 6, int ss = 6, int ms = 6, int ds = 6)
+		Student(string ns, int al = 2, int sl = 4, int ml = 2, int dl = 2, int as = 6, int ss = 6, int ms = 6, int ds = 6)
 		{
 			name = ns;
 			addLevel = al;
@@ -424,33 +497,6 @@ class Student
 		{
 			divSpeed = ds;
 		}
-		/*void makeAddTemplateArr(Student & s)
-		{
-			int numUniqueProblems = (MAX_ADDEND + 1) * (MAX_ADDEND + 1);
-			addTemplateArr = new AddTemplate[numUniqueProblems];
-			int ndx = 0;
-			for(int l=0; l<=MAX_ADDEND;l++)
-			{
-				int fa = l;
-				for(int sa=0;sa<=l;sa++)
-				{
-					int s = fa + sa;
-					addTemplateArr[ndx].setFirstAddend(fa);
-					addTemplateArr[ndx].setSecondAddend(sa);
-					addTemplateArr[ndx].setSum(s);
-					ndx++;
-				}
-				int sa = l;
-				for(int fa=0;fa<l;fa++)
-				{
-					int s = fa + sa;
-					addTemplateArr[ndx].setFirstAddend(fa);
-					addTemplateArr[ndx].setSecondAddend(sa);
-					addTemplateArr[ndx].setSum(s);
-					ndx++;
-				}
-			}
-		}*/
 		void makeAddTemplateArr(Student & s)
 		{
 			int numUniqueProblems = (MAX_ADDEND + 1) * (MAX_ADDEND + 1);
@@ -500,6 +546,7 @@ class Student
 		}
 		void makeMltTemplateArr(Student & s)
 		{
+			// puts vals in arr for each level sequentially
 			int numUniqueProblems = (MAX_FACTOR + 1) * (MAX_FACTOR + 1);
 			mltTemplateArr = new MltTemplate[numUniqueProblems];
 			int ndx = 0;
@@ -523,6 +570,36 @@ class Student
 					mltTemplateArr[ndx].setFirstFactor(ff);
 					mltTemplateArr[ndx].setSecondFactor(sf);
 					mltTemplateArr[ndx].setProduct(p);
+					ndx++;
+				}
+			}
+		}
+		void makeDivTemplateArr(Student & s)
+		{
+			// puts vals in arr for each level sequentially
+			int numUniqueProblems = (MAX_FACTOR + 1) * (MAX_FACTOR); // no zero denominators
+			divTemplateArr = new DivTemplate[numUniqueProblems];
+			int ndx = 0;
+			for(int l=1; l<=MAX_FACTOR;l++)
+			{
+				int ff;
+				int sf;
+				ff = l;
+				for(sf=0;sf<=ff;sf++)
+				{
+					int p = ff * sf;
+					divTemplateArr[ndx].setFirstFactor(ff); // firstFactor = denominator
+					divTemplateArr[ndx].setSecondFactor(sf); // secondFactor = quotient
+divTemplateArr[ndx].setProduct(p); // product = numerator
+					ndx++;
+				}
+				sf = ff;
+				for(ff=1;ff<l;ff++) // denominator can't be zero
+				{
+					int p = ff * sf;
+					divTemplateArr[ndx].setFirstFactor(ff);
+					divTemplateArr[ndx].setSecondFactor(sf);
+					divTemplateArr[ndx].setProduct(p);
 					ndx++;
 				}
 			}
