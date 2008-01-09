@@ -319,7 +319,7 @@ void loginUser(Student & s, fstream & userdatFob)
 				<< endl
 				<< "     Press Enter to continue.  ";
 			getchar();
-		}
+		
 		else
 		{
 			cout << endl
