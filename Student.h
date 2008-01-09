@@ -47,7 +47,7 @@ class ProblemTemplate
 	public:
 		ProblemTemplate()
 		{
-			frequency = 10;
+			frequency = 20;
 		}
 		int getFrequency()
 		{

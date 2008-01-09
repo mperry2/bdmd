@@ -112,11 +112,14 @@ void subModule(Student & s)
 					cumWrong++;
 					oldFreq = subBagArr[ndxSelectedProblem].getFrequency();
 					currSubTemplateNdx = subBagArr[ndxSelectedProblem].getSubTemplateNdx();
-					newFreq = oldFreq * 2;
-					if(newFreq > 10)
-					{
-						newFreq = 10;
-					}
+					newFreq = 20;
+					//--------------------------------------------------
+					// newFreq = oldFreq * 2;
+					// if(newFreq > 10)
+					// {
+					// 	newFreq = 10;
+					// }
+					//-------------------------------------------------- 
 					s.getSubTemplateArr()[currSubTemplateNdx].setFrequency(newFreq);
 					cout << endl
 					<< "     But you did not answer within " << s.getSubSpeed() << " seconds." << endl;
@@ -155,11 +158,14 @@ void subModule(Student & s)
 				}
 				oldFreq = subBagArr[ndxSelectedProblem].getFrequency();
 				currSubTemplateNdx = subBagArr[ndxSelectedProblem].getSubTemplateNdx();
-				newFreq = oldFreq * 2;
-				if(newFreq > 10)
-				{
-					newFreq = 10;
-				}
+				newFreq = 20;
+				//--------------------------------------------------
+				// newFreq = oldFreq * 2;
+				// if(newFreq > 10)
+				// {
+				// 	newFreq = 10;
+				// }
+				//-------------------------------------------------- 
 				s.getSubTemplateArr()[currSubTemplateNdx].setFrequency(newFreq);
 			}
 		}
