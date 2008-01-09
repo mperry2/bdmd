@@ -1,0 +1,33 @@
+Introduction
+
+Big Daddy's Math Drills is a simple, effective, free, opensource program for drilling basic addition, subtraction, and multiplication facts.  Compiled binary files are available for Windows XP and Linux compatible systems.
+
+Installing and Uninstalling
+
+For Linux and Windows users, just put the executable binary file in a folder by itself where the user has read, write, and execute permissions.  There are no hooks into the operating system, so no worries.  To uninstall both program and data, delete the folder.
+
+Operation
+
+Just start the program and follow the prompts.
+
+The program works like flash cards, but it's more effective because:
+
+1. The program starts out easy, a limited set of small numbers first.  It progressively decreases the frequency of drill for problems that you answer correctly, and increases the frequency of drill for problems you answer wrong.
+
+2. As you gain in accuracy at a given level, the programe reduces the amount of time allowed for each answer.
+
+3. When you have mastered the problems at a lower level, the program automatically moves you up to the next level, where you again start out with more time to answer each question.  The problems from old levels still appear from time to time, to make sure you don't forget them, but you get more intensive drill in the newer material.
+
+4. When you get tired of doing one kind of problem, you can work on another module.
+
+5. When you quit, the program saves your profile, so when you restart with the same username you pick up right where you left off.  If you want to start over, just change your username or delete your profile, which is in the same folder as the executable, and is named with the username plus a ".dat" extension.
+
+6. There are graphics or sound effects to get in the way of concentrating.  As a result, the program is very fast and very effective.
+
+7. We recommend that, when you start using the program, you set your Num Lock on and use the number pad on your keyboard, if you have one.  It will not only improve your speed doing the drills, but when you're done you will be handy with an adding machine, too.
+
+Credits, Licensing, and Feedback
+
+Previous versions of this software were written by Vincent DiCarlo to help his children learn their basic arithmetic and made available under license as freeware.  Version 2.0, which added the adaptive learning features and the persistent user profiles, was written by DiCarlo, Vladimir Giyenko, and David Phong as a class project for Professor Tim Wei at Sacramento Community College and is made available by the authors under the GNU General Public License version 3.0.  Copyright 2007 by Vincent DiCarlo, Vladimir Giyenko, and David Phong.
+
+The Big Daddy's Math Drills project is hosted at http://sourceforge.net/projects/bdmd where you may download the sourcecode and post questions, requests, or comments.  This software is released without warranty or support of any kind.
