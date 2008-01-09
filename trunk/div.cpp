@@ -110,11 +110,14 @@ void divModule(Student & s)
 					cumWrong++;
 					oldFreq = divBagArr[ndxSelectedProblem].getFrequency();
 					currDivTemplateNdx = divBagArr[ndxSelectedProblem].getDivTemplateNdx();
-					newFreq = oldFreq * 2;
-					if(newFreq > 10)
-					{
-						newFreq = 10;
-					}
+					newFreq = 20;
+					//--------------------------------------------------
+					// newFreq = oldFreq * 2;
+					// if(newFreq > 10)
+					// {
+					// 	newFreq = 10;
+					// }
+					//-------------------------------------------------- 
 					s.getDivTemplateArr()[currDivTemplateNdx].setFrequency(newFreq);
 					cout << endl
 					<< "     But you did not answer within " << s.getDivSpeed() << " seconds." << endl;
@@ -153,11 +156,14 @@ void divModule(Student & s)
 				}
 				oldFreq = divBagArr[ndxSelectedProblem].getFrequency();
 				currDivTemplateNdx = divBagArr[ndxSelectedProblem].getDivTemplateNdx();
-				newFreq = oldFreq * 2;
-				if(newFreq > 10)
-				{
-					newFreq = 10;
-				}
+				newFreq = 20;
+				//--------------------------------------------------
+				// newFreq = oldFreq * 2;
+				// if(newFreq > 10)
+				// {
+				// 	newFreq = 10;
+				// }
+				//-------------------------------------------------- 
 				s.getDivTemplateArr()[currDivTemplateNdx].setFrequency(newFreq);
 			}
 		}

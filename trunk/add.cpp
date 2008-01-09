@@ -108,11 +108,14 @@ void addModule(Student & s)
 					cumWrong++;
 					oldFreq = addBagArr[ndxSelectedProblem].getFrequency();
 					currAddTemplateNdx = addBagArr[ndxSelectedProblem].getAddTemplateNdx();
-					newFreq = oldFreq * 2;
-					if(newFreq > 10)
-					{
-						newFreq = 10;
-					}
+					newFreq = 20;
+					//--------------------------------------------------
+					// newFreq = oldFreq * 2;
+					// if(newFreq > 20)
+					// {
+					// 	newFreq = 20;
+					// }
+					//-------------------------------------------------- 
 					s.getAddTemplateArr()[currAddTemplateNdx].setFrequency(newFreq);
 					cout << endl
 					<< "     But you did not answer within " << s.getAddSpeed() << " seconds." << endl;
@@ -151,11 +154,14 @@ void addModule(Student & s)
 				}
 				oldFreq = addBagArr[ndxSelectedProblem].getFrequency();
 				currAddTemplateNdx = addBagArr[ndxSelectedProblem].getAddTemplateNdx();
-				newFreq = oldFreq * 2;
-				if(newFreq > 10)
-				{
-					newFreq = 10;
-				}
+				newFreq = 20;
+				//--------------------------------------------------
+				// newFreq = oldFreq * 2;
+				// if(newFreq > 10)
+				// {
+				// 	newFreq = 10;
+				// }
+				//-------------------------------------------------- 
 				s.getAddTemplateArr()[currAddTemplateNdx].setFrequency(newFreq);
 			}
 		}

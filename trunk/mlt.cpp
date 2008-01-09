@@ -115,11 +115,14 @@ void mltModule(Student & s)
 					cumWrong++;
 					oldFreq = mltBagArr[ndxSelectedProblem].getFrequency();
 					currMltTemplateNdx = mltBagArr[ndxSelectedProblem].getMltTemplateNdx();
-					newFreq = oldFreq * 2;
-					if(newFreq > 10)
-					{
-						newFreq = 10;
-					}
+					newFreq = 20;
+					//--------------------------------------------------
+					// newFreq = oldFreq * 2;
+					// if(newFreq > 10)
+					// {
+					// 	newFreq = 10;
+					// }
+					//-------------------------------------------------- 
 					s.getMltTemplateArr()[currMltTemplateNdx].setFrequency(newFreq);
 					cout << endl
 					<< "     But you did not answer within " << s.getMltSpeed() << " seconds." << endl;
@@ -158,11 +161,14 @@ void mltModule(Student & s)
 				}
 				oldFreq = mltBagArr[ndxSelectedProblem].getFrequency();
 				currMltTemplateNdx = mltBagArr[ndxSelectedProblem].getMltTemplateNdx();
-				newFreq = oldFreq * 2;
-				if(newFreq > 10)
-				{
-					newFreq = 10;
-				}
+				newFreq = 20;
+				//--------------------------------------------------
+				// newFreq = oldFreq * 2;
+				// if(newFreq > 10)
+				// {
+				// 	newFreq = 10;
+				// }
+				//-------------------------------------------------- 
 				s.getMltTemplateArr()[currMltTemplateNdx].setFrequency(newFreq);
 			}
 		}
