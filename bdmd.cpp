@@ -1,5 +1,5 @@
 // Big Daddy's Math Drills
-// Version 2.0 released January 2007
+// Version 2.0 released January 2008
 //
 // Big Daddy's Math Drills Copyright 1998, 2003, 2007 Vincent DiCarlo
 //
@@ -319,7 +319,7 @@ void loginUser(Student & s, fstream & userdatFob)
 				<< endl
 				<< "     Press Enter to continue.  ";
 			getchar();
-		
+		}
 		else
 		{
 			cout << endl
