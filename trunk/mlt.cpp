@@ -1,3 +1,68 @@
+// Big Daddy's Math Drills
+// Version 2.0 released January 2008
+//
+// Big Daddy's Math Drills Copyright 1998, 2003, 2007 Vincent DiCarlo
+//
+// Files inluded in the sourcecode distribution:
+// 		add.cpp - The the addition module.
+//	 	bdmd.cpp - Contains main().
+//		copying.txt - The Gnu general public license.
+// 		div.cpp - The division module.
+// 		makefile - The gcc makefile.
+// 		mlt.cpp - The multiplication module.
+// 		readme - Instructions, notes, legal.
+// 		Student.cpp - Implementation for Student class
+// 		Student.h - Specificiation and implementation
+// 				of the Student class.
+// 		sub.cpp - The subtraction module.
+// 		vkit.cpp - Utilities.
+// 		vkit.h - Header for vkit.cpp.
+//
+// 	Binaries released:
+//		bdmd - Linux executable.
+//		bdmd.exe - MS Windows executable.
+//
+// Revision History:
+// 		Version 1.0 released March 1998
+// 		Version 1.2 released December 2003
+//
+// 	Version notes:
+// 		This version has very little in the way
+// 		of input validation and error checking
+// 		and uses more memory and disk space
+// 		than it would if it were modified so
+// 		that it only created and saved templates
+// 		needed for the current level of the user,
+// 		but it is feature complete.  It was
+// 		compiled with gcc and tested under Suse 
+// 		Linux 10.3 and compiled with MS Visual
+// 		Studio and tested under WinXP.
+//
+//	License:
+//		This file, and all the other files in this
+//		distribution as described above, including 
+//		the binaries released, are part of Big 
+//		Daddy's Math Drills.  Big Daddy's Math Drills 
+//		is free software: you can redistribute it 
+//		and/or modify it under the terms of the GNU 
+//		General Public License as published by the 
+//		Free Software Foundation, either version 3
+//		of the License, or (at your option) any 
+//		later version.
+//
+//		Big Daddy's Math Drills is distributed
+//		in the hope that it will be useful,	but 
+//		WITHOUT ANY WARRANTY; without even the 
+//		implied warranty of MERCHANTABILITY or 
+//		FITNESS FOR A PARTICULAR PURPOSE.  See 
+//		the GNU General Public License for more 
+//		details.
+//
+//		You should have received a copy of the GNU
+//		General Public License along with Big 
+//		Daddy's Math Drills.  If not, see 
+//		<http://www.gnu.org/licenses/>.
+
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
@@ -84,11 +149,6 @@ void mltModule(Student & s)
 			}
 			ndxSelectedProblem = rand() % numProblems;
 			startTime = time(NULL);
-			//cout << endl << endl << "startTime: " << startTime << endl;
-			//cin.sync(); // This doesn't seem to flush cin on lin or win.
-			// cin.flush(); // Compile err under win; no help under lin.
-			//cin.clear(); // This doesn't help, either.
-			//cout << endl << "cin.rdbuf()->in_avail(): " << cin.rdbuf()->in_avail() << endl; //this always returns 0
 			cout << endl
 				<< "     " << mltBagArr[ndxSelectedProblem].getFirstFactor() << "  *  "
 				<< mltBagArr[ndxSelectedProblem].getSecondFactor() << "  =  ";
@@ -116,13 +176,6 @@ void mltModule(Student & s)
 					oldFreq = mltBagArr[ndxSelectedProblem].getFrequency();
 					currMltTemplateNdx = mltBagArr[ndxSelectedProblem].getMltTemplateNdx();
 					newFreq = 20;
-					//--------------------------------------------------
-					// newFreq = oldFreq * 2;
-					// if(newFreq > 10)
-					// {
-					// 	newFreq = 10;
-					// }
-					//-------------------------------------------------- 
 					s.getMltTemplateArr()[currMltTemplateNdx].setFrequency(newFreq);
 					cout << endl
 					<< "     But you did not answer within " << s.getMltSpeed() << " seconds." << endl;
@@ -162,13 +215,6 @@ void mltModule(Student & s)
 				oldFreq = mltBagArr[ndxSelectedProblem].getFrequency();
 				currMltTemplateNdx = mltBagArr[ndxSelectedProblem].getMltTemplateNdx();
 				newFreq = 20;
-				//--------------------------------------------------
-				// newFreq = oldFreq * 2;
-				// if(newFreq > 10)
-				// {
-				// 	newFreq = 10;
-				// }
-				//-------------------------------------------------- 
 				s.getMltTemplateArr()[currMltTemplateNdx].setFrequency(newFreq);
 			}
 		}
@@ -243,3 +289,4 @@ void mltModule(Student & s)
 		cout << endl;
 	}
 }
+

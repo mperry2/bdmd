@@ -5,19 +5,20 @@
 //
 // Files inluded in the sourcecode distribution:
 // 		add.cpp - The the addition module.
-//	 	bdmd.cpp - This file. Contains main().
+//	 	bdmd.cpp - Contains main().
 //		copying.txt - The Gnu general public license.
 // 		div.cpp - The division module.
 // 		makefile - The gcc makefile.
 // 		mlt.cpp - The multiplication module.
+// 		readme - Instructions, notes, legal.
+// 		Student.cpp - Implementation for Student class
 // 		Student.h - Specificiation and implementation
 // 				of the Student class.
-// 		Student.cpp - Implementation for Student class
 // 		sub.cpp - The subtraction module.
-// 		vkit.h - Header for vkit.cpp.
 // 		vkit.cpp - Utilities.
+// 		vkit.h - Header for vkit.cpp.
 //
-// 	Binaries released:
+// Binaries released:
 //		bdmd - Linux executable.
 //		bdmd.exe - MS Windows executable.
 //
@@ -25,7 +26,7 @@
 // 		Version 1.0 released March 1998
 // 		Version 1.2 released December 2003
 //
-// 	Version notes:
+// Version notes:
 // 		This version has very little in the way
 // 		of input validation and error checking
 // 		and uses more memory and disk space
@@ -37,7 +38,7 @@
 // 		Linux 10.3 and compiled with MS Visual
 // 		Studio and tested under WinXP.
 //
-//	License:
+// License:
 //		This file, and all the other files in this
 //		distribution as described above, including 
 //		the binaries released, are part of Big 
@@ -81,13 +82,16 @@ void mltModule(Student & s);
 void divModule(Student & s);
 void displayReport(Student & s);
 void displayHelp();
+
+// print template array fns for testing
 void printAddTemplateArr(Student & s);
 void printSubTemplateArr(Student & s);
 void printMltTemplateArr(Student & s);
+
 void writeUserDat(fstream & userdatFob);
 
 int main()
-{{{
+{
 	fstream userdatFob;
 	Student s;
 
@@ -100,10 +104,10 @@ int main()
 	loginUser(s, userdatFob);
 	displayMainMenu(s, userdatFob);	
 	return 0;
-}}}
+}
 
 void loginUser(Student & s, fstream & userdatFob)
-{{{
+{
 	string userNameStrob;
 	string userFileNameStrob;
 	char userNameStr[MAX_NAME+1];
@@ -328,15 +332,13 @@ void loginUser(Student & s, fstream & userdatFob)
 				<< "     denominators of 2." << endl
 				<< endl
 				<< "     Press Enter to continue.  ";
-			//debug
-			cout << "divLevel: " << s.getDivLevel() << endl;
 			getchar();
 		}
 	}
-}}}
+}
 
 void displayMainMenu(Student & s, fstream & userdatFob)
-{{{
+ {
 	unsigned short keepGoing = 1;
 	unsigned short mainMenu = 1;
 	clearScreen();
@@ -380,10 +382,10 @@ void displayMainMenu(Student & s, fstream & userdatFob)
 			clearScreen();
 		}
 	}
-}}}
+}
 
 unsigned short getChoice()
-{{{
+{
 	unsigned short userInput = 10;
 	string inputStrObj = "q";
 	stringstream ss;
@@ -414,10 +416,10 @@ unsigned short getChoice()
 			ss >> userInput;
 		}
 	return userInput;
-}}}
+}
 
 void displayReport(Student & s)
-{{{
+{
 	clearScreen();
 	cout << endl << endl;
 	cout << "\t      BIG DADDY'S MATH DRILLS" << endl << endl;
@@ -438,10 +440,10 @@ void displayReport(Student & s)
 			<< endl  << endl
 			<< "\tPress Enter to return to main menu.  ";
 	getchar();
-}}}
+}
 
 void displayHelp()
-{{{
+{
 	cout << endl << endl
 	<< "             Introduction" << endl << endl
 
@@ -607,5 +609,5 @@ void displayHelp()
 		<< "     Press Enter to return to the main menu.  ";
 	getchar();
 	clearScreen();
-}}}
+}
 

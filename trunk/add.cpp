@@ -1,3 +1,68 @@
+// Big Daddy's Math Drills
+// Version 2.0 released January 2008
+//
+// Big Daddy's Math Drills Copyright 1998, 2003, 2007 Vincent DiCarlo
+//
+// Files inluded in the sourcecode distribution:
+// 		add.cpp - The the addition module.
+//	 	bdmd.cpp - Contains main().
+//		copying.txt - The Gnu general public license.
+// 		div.cpp - The division module.
+// 		makefile - The gcc makefile.
+// 		mlt.cpp - The multiplication module.
+// 		readme - Instructions, notes, legal.
+// 		Student.cpp - Implementation for Student class
+// 		Student.h - Specificiation and implementation
+// 				of the Student class.
+// 		sub.cpp - The subtraction module.
+// 		vkit.cpp - Utilities.
+// 		vkit.h - Header for vkit.cpp.
+//
+// 	Binaries released:
+//		bdmd - Linux executable.
+//		bdmd.exe - MS Windows executable.
+//
+// Revision History:
+// 		Version 1.0 released March 1998
+// 		Version 1.2 released December 2003
+//
+// 	Version notes:
+// 		This version has very little in the way
+// 		of input validation and error checking
+// 		and uses more memory and disk space
+// 		than it would if it were modified so
+// 		that it only created and saved templates
+// 		needed for the current level of the user,
+// 		but it is feature complete.  It was
+// 		compiled with gcc and tested under Suse 
+// 		Linux 10.3 and compiled with MS Visual
+// 		Studio and tested under WinXP.
+//
+//	License:
+//		This file, and all the other files in this
+//		distribution as described above, including 
+//		the binaries released, are part of Big 
+//		Daddy's Math Drills.  Big Daddy's Math Drills 
+//		is free software: you can redistribute it 
+//		and/or modify it under the terms of the GNU 
+//		General Public License as published by the 
+//		Free Software Foundation, either version 3
+//		of the License, or (at your option) any 
+//		later version.
+//
+//		Big Daddy's Math Drills is distributed
+//		in the hope that it will be useful,	but 
+//		WITHOUT ANY WARRANTY; without even the 
+//		implied warranty of MERCHANTABILITY or 
+//		FITNESS FOR A PARTICULAR PURPOSE.  See 
+//		the GNU General Public License for more 
+//		details.
+//
+//		You should have received a copy of the GNU
+//		General Public License along with Big 
+//		Daddy's Math Drills.  If not, see 
+//		<http://www.gnu.org/licenses/>.
+
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
@@ -48,16 +113,16 @@ void addModule(Student & s)
 		cumRight = 0;
 		cumWrong = 0;
 		cumProblems = 0;
-		templatesUsed = (s.getAddLevel() + 1) * (s.getAddLevel() + 1);
+		templatesUsed = (s.getAddLevel() + 1) * (s.getAddLevel() + 1); // num templates at user's level
 
 		addBagArr = new AddTemplate[1]; // for the first delete
-		for(int i = 0; i < SET_SIZE; i++)
+		for(int i = 0; i < SET_SIZE; i++) // make a bag of addition problems
 		{
 			numProblems = 0;
 			tooLong = 0;
 			for(int i = 0; i < templatesUsed; i++)
 			{
-				numProblems += s.getAddTemplateArr()[i].getFrequency();
+				numProblems += s.getAddTemplateArr()[i].getFrequency(); // num problems to put in bag
 			}
 			delete [] addBagArr;
 			addBagArr = new AddTemplate[numProblems];
@@ -65,7 +130,7 @@ void addModule(Student & s)
 			for(int i = 0; i < templatesUsed; i++)
 			{
 				freq = s.getAddTemplateArr()[i].getFrequency();
-				for(int j = 0; j <  freq; j++)
+				for(int j = 0; j <  freq; j++) // put freq copies of each template in bag
 				{
 					firstAddend = s.getAddTemplateArr()[i].getFirstAddend();
 					secondAddend = s.getAddTemplateArr()[i].getSecondAddend();
@@ -109,13 +174,6 @@ void addModule(Student & s)
 					oldFreq = addBagArr[ndxSelectedProblem].getFrequency();
 					currAddTemplateNdx = addBagArr[ndxSelectedProblem].getAddTemplateNdx();
 					newFreq = 20;
-					//--------------------------------------------------
-					// newFreq = oldFreq * 2;
-					// if(newFreq > 20)
-					// {
-					// 	newFreq = 20;
-					// }
-					//-------------------------------------------------- 
 					s.getAddTemplateArr()[currAddTemplateNdx].setFrequency(newFreq);
 					cout << endl
 					<< "     But you did not answer within " << s.getAddSpeed() << " seconds." << endl;
@@ -155,13 +213,6 @@ void addModule(Student & s)
 				oldFreq = addBagArr[ndxSelectedProblem].getFrequency();
 				currAddTemplateNdx = addBagArr[ndxSelectedProblem].getAddTemplateNdx();
 				newFreq = 20;
-				//--------------------------------------------------
-				// newFreq = oldFreq * 2;
-				// if(newFreq > 10)
-				// {
-				// 	newFreq = 10;
-				// }
-				//-------------------------------------------------- 
 				s.getAddTemplateArr()[currAddTemplateNdx].setFrequency(newFreq);
 			}
 		}
@@ -236,3 +287,4 @@ void addModule(Student & s)
 		cout << endl;
 	}
 }
+
