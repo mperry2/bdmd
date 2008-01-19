@@ -1,3 +1,68 @@
+// Big Daddy's Math Drills
+// Version 2.0 released January 2008
+//
+// Big Daddy's Math Drills Copyright 1998, 2003, 2007 Vincent DiCarlo
+//
+// Files inluded in the sourcecode distribution:
+// 		add.cpp - The the addition module.
+//	 	bdmd.cpp - Contains main().
+//		copying.txt - The Gnu general public license.
+// 		div.cpp - The division module.
+// 		makefile - The gcc makefile.
+// 		mlt.cpp - The multiplication module.
+// 		readme - Instructions, notes, legal.
+// 		Student.cpp - Implementation for Student class
+// 		Student.h - Specificiation and implementation
+// 				of the Student class.
+// 		sub.cpp - The subtraction module.
+// 		vkit.cpp - Utilities.
+// 		vkit.h - Header for vkit.cpp.
+//
+// Binaries released:
+//		bdmd - Linux executable.
+//		bdmd.exe - MS Windows executable.
+//
+// Revision History:
+// 		Version 1.0 released March 1998
+// 		Version 1.2 released December 2003
+//
+// Version notes:
+// 		This version has very little in the way
+// 		of input validation and error checking
+// 		and uses more memory and disk space
+// 		than it would if it were modified so
+// 		that it only created and saved templates
+// 		needed for the current level of the user,
+// 		but it is feature complete.  It was
+// 		compiled with gcc and tested under Suse 
+// 		Linux 10.3 and compiled with MS Visual
+// 		Studio and tested under WinXP.
+//
+// License:
+//		This file, and all the other files in this
+//		distribution as described above, including 
+//		the binaries released, are part of Big 
+//		Daddy's Math Drills.  Big Daddy's Math Drills 
+//		is free software: you can redistribute it 
+//		and/or modify it under the terms of the GNU 
+//		General Public License as published by the 
+//		Free Software Foundation, either version 3
+//		of the License, or (at your option) any 
+//		later version.
+//
+//		Big Daddy's Math Drills is distributed
+//		in the hope that it will be useful,	but 
+//		WITHOUT ANY WARRANTY; without even the 
+//		implied warranty of MERCHANTABILITY or 
+//		FITNESS FOR A PARTICULAR PURPOSE.  See 
+//		the GNU General Public License for more 
+//		details.
+//
+//		You should have received a copy of the GNU
+//		General Public License along with Big 
+//		Daddy's Math Drills.  If not, see 
+//		<http://www.gnu.org/licenses/>.
+
 #include "vkit.h"
 #include "Student.h"
 #include <fstream>
@@ -5,11 +70,23 @@
 #include <sstream>
 using namespace std;
 
-// [debugging]
+// [utility]
+
+// clears screen under Win and Lin
+void clearScreen()
+{
+#ifdef _WIN32
+	system("cls");
+#else
+	system("clear");
+#endif
+}
+
+// [general testing]
 
 // prints fob status bits
 void fobState(fstream & fob) 
-{{{
+{
 	cout << endl;
 	cout << "eof bit: " << fob.eof() << endl;
 	cout << "fail bit: " << fob.fail() << endl;
@@ -17,11 +94,11 @@ void fobState(fstream & fob)
 	cout << "good bit: " << fob.good() << endl;
 	cout << endl;
 	fob.clear();
-}}}
+}
 
 // prints sstream status bits
 void stringstreamState(stringstream & ss) 
-{{{
+{
 	cout << endl;
 	cout << "eof bit: " << ss.eof() << endl;
 	cout << "fail bit: " << ss.fail() << endl;
@@ -29,11 +106,11 @@ void stringstreamState(stringstream & ss)
 	cout << "good bit: " << ss.good() << endl;
 	cout << endl;
 	ss.clear();
-}}}
+}
 
 // prints istream status bits
 void istreamState(istream & is) 
-{{{
+{
 	cout << endl;
 	cout << "eof bit: " << is.eof() << endl;
 	cout << "fail bit: " << is.fail() << endl;
@@ -41,11 +118,13 @@ void istreamState(istream & is)
 	cout << "good bit: " << is.good() << endl;
 	cout << endl;
 	is.clear();
-}}}
+}
 
+// [testing this program]
+
+// print data members of Student.h class
 void printStudent(Student & s)
-{{{
-	// print data members of Student.h class
+{
 	cout << endl
 		<< "s.name: " << s.getName() << endl
 		<< "s.addLevel: " << s.getAddLevel() << endl
@@ -64,10 +143,10 @@ void printStudent(Student & s)
 	printSubTemplateArr(s);
 	printMltTemplateArr(s);
 	printDivTemplateArr(s);
-}}}
+}
 
 void printAddTemplateArr(Student & s)
-{{{
+{
 	int numUsed = (s.getAddLevel() + 1) * (s.getAddLevel() + 1);
 	for(int i=0;i<numUsed;i++)
 	{
@@ -86,10 +165,10 @@ void printAddTemplateArr(Student & s)
 		cout << "s.addTemplateArr[" << i << "].addTemplateNdx: " 
 			<< s.getAddTemplateArr()[i].getAddTemplateNdx() << endl;
 	}
-}}}
+}
 
 void printSubTemplateArr(Student & s)
-{{{
+{
 	int numUsed = (((s.getSubLevel() + 1) * (s.getSubLevel() + 1)) / 2) + (s.getSubLevel() / 2) + 1;
 	for(int i=0;i<numUsed;i++)
 	{
@@ -108,10 +187,10 @@ void printSubTemplateArr(Student & s)
 			<< s.getSubTemplateArr()[i].getSubTemplateNdx() << endl<< endl;
 
 	}
-}}}
+}
 
 void printMltTemplateArr(Student & s)
-{{{
+{
 	int numUsed = (s.getMltLevel() + 1) * (s.getMltLevel() + 1); 
 	for(int i=0;i<numUsed;i++)
 	{
@@ -129,10 +208,10 @@ void printMltTemplateArr(Student & s)
 			<< "s.mltTemplateArr[" << i << "].mltTemplateNdx: " 
 			<< s.getMltTemplateArr()[i].getMltTemplateNdx() << endl;
 	}
-}}}
+}
 
 void printDivTemplateArr(Student & s)
-{{{
+{
 	int numUsed = (s.getDivLevel() + 1) * s.getDivLevel(); 
 	for(int i=0;i<numUsed;i++)
 	{
@@ -150,10 +229,10 @@ void printDivTemplateArr(Student & s)
 			<< "s.divTemplateArr[" << i << "].divTemplateNdx: " 
 			<< s.getDivTemplateArr()[i].getDivTemplateNdx() << endl;
 	}
-}}}
+}
 
 void printAddBagArr(Student & s, AddTemplate * addBagArr)
-{{{
+{
 	int numUsed = (s.getAddLevel() + 1) * (s.getAddLevel() + 1);
 	int ndx = 0;
 	for(int i=0;i<numUsed;i++)
@@ -172,17 +251,5 @@ void printAddBagArr(Student & s, AddTemplate * addBagArr)
 		}
 		ndx += freq;
 	}
-}}}
-
-// [utility]
-
-// clears screen under Win and Lin
-void clearScreen()
-{{{
-#ifdef _WIN32
-	system("cls");
-#else
-	system("clear");
-#endif
-}}}
+}
 

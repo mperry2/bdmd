@@ -1,19 +1,67 @@
-// CISP400 Ch15pc1
-// Term Project Big Daddy's Math Drills
-// Professor Tim Wei
-// Team Charlie
+// Big Daddy's Math Drills
+// Version 2.0 released January 2008
 //
-// Files needed to build project:
+// Big Daddy's Math Drills Copyright 1998, 2003, 2007 Vincent DiCarlo
+//
+// Files inluded in the sourcecode distribution:
+// 		add.cpp - The the addition module.
 //	 	bdmd.cpp - Contains main().
-// 		Student.h - This file.  Specificiation and implementation
+//		copying.txt - The Gnu general public license.
+// 		div.cpp - The division module.
+// 		makefile - The gcc makefile.
+// 		mlt.cpp - The multiplication module.
+// 		readme - Instructions, notes, legal.
+// 		Student.cpp - Implementation for Student class
+// 		Student.h - Specificiation and implementation
 // 				of the Student class.
-// 		add.cpp - The entrypoint for the addition module.
-// 		sub.cpp - The entrypoint for the subtraction module.
-// 		mlt.cpp - The entrypoint for the multiplication module.
+// 		sub.cpp - The subtraction module.
+// 		vkit.cpp - Utilities.
+// 		vkit.h - Header for vkit.cpp.
+//
+// 	Binaries released:
+//		bdmd - Linux executable.
+//		bdmd.exe - MS Windows executable.
 //
 // Revision History:
-//		Begun 20071117
-// 		Finished, tested, and turned in ---
+// 		Version 1.0 released March 1998
+// 		Version 1.2 released December 2003
+//
+// Version notes:
+// 		This version has very little in the way
+// 		of input validation and error checking
+// 		and uses more memory and disk space
+// 		than it would if it were modified so
+// 		that it only created and saved templates
+// 		needed for the current level of the user,
+// 		but it is feature complete.  It was
+// 		compiled with gcc and tested under Suse 
+// 		Linux 10.3 and compiled with MS Visual
+// 		Studio and tested under WinXP.
+//
+// License:
+//		This file, and all the other files in this
+//		distribution as described above, including 
+//		the binaries released, are part of Big 
+//		Daddy's Math Drills.  Big Daddy's Math Drills 
+//		is free software: you can redistribute it 
+//		and/or modify it under the terms of the GNU 
+//		General Public License as published by the 
+//		Free Software Foundation, either version 3
+//		of the License, or (at your option) any 
+//		later version.
+//
+//		Big Daddy's Math Drills is distributed
+//		in the hope that it will be useful,	but 
+//		WITHOUT ANY WARRANTY; without even the 
+//		implied warranty of MERCHANTABILITY or 
+//		FITNESS FOR A PARTICULAR PURPOSE.  See 
+//		the GNU General Public License for more 
+//		details.
+//
+//		You should have received a copy of the GNU
+//		General Public License along with Big 
+//		Daddy's Math Drills.  If not, see 
+//		<http://www.gnu.org/licenses/>.
 
 #ifndef STUDENT_H
 #define STUDENT_H
@@ -29,15 +77,10 @@ class SubTemplate;
 class MltTemplate;
 class DivTemplate;
 
-//debug
 const int MAX_ADDEND = 100;
-//const int MAX_ADDEND = 2;
 const int MAX_MINUEND = 100;
-//const int MAX_MINUEND = 2;
 const int MAX_FACTOR = 20;
-//const int MAX_FACTOR = 2;
 const int MAX_NUMERATOR = 400;
-//const int MAX_NUMERATOR = 2;
 const int MAX_NAME = 40;
 
 class ProblemTemplate
@@ -47,7 +90,7 @@ class ProblemTemplate
 	public:
 		ProblemTemplate()
 		{
-			frequency = 20;
+			frequency = 20; // how many copies to put in the bag
 		}
 		int getFrequency()
 		{
@@ -66,7 +109,7 @@ class AddTemplate : public ProblemTemplate
 		int secondAddend;
 		int sum;
 		int addTemplateNdx;
-		static int objCnt;
+		static int objCnt; // improve in revision
 	public:
 		AddTemplate()
 		{
@@ -74,9 +117,9 @@ class AddTemplate : public ProblemTemplate
 			firstAddend = -1;
 			secondAddend = -1;
 			sum = firstAddend + secondAddend;
-			addTemplateNdx = objCnt -1;
+			addTemplateNdx = objCnt -1; // improve in revision
 		}
-		AddTemplate(int fa, int sa)
+		AddTemplate(int fa, int sa) // not used
 		{
 			objCnt++;
 			firstAddend = fa;
@@ -263,9 +306,9 @@ class MltTemplate : public ProblemTemplate
 class DivTemplate : public ProblemTemplate
 {
 	protected:
-		int firstFactor;
-		int secondFactor;
-		int product;
+		int firstFactor; // used for denominator
+		int secondFactor; // quotient
+		int product; // numerator
 		int divTemplateNdx;
 		static int objCnt;
 	public:
@@ -326,32 +369,6 @@ class DivTemplate : public ProblemTemplate
 			objCnt = o;
 		}
 };
-//--------------------------------------------------
-// class DivTemplate : public ProblemTemplate
-// {
-// 	protected:
-// 		static int objCnt;
-// 		int numerator;
-// 		int denominator;
-// 		int quotient;
-// 	public:
-// 		DivTemplate()
-// 		{
-// 			objCnt++;
-// 			numerator = -1;
-// 			denominator = 500;
-// 			quotient = numerator / denominator;
-// 		}
-// 
-// 		DivTemplate(int n, int d)
-// 		{
-// 			objCnt++;
-// 			numerator = n;
-// 			denominator = d;
-// 			quotient = numerator / denominator;
-// 		}
-// };
-//-------------------------------------------------- 
 
 class Student
 {
@@ -390,7 +407,7 @@ class Student
 			mltSpeed = 6;
 			divSpeed = 6;
 		}
-		Student(string ns, int al = 2, int sl = 4, int ml = 2, int dl = 2, int as = 6, int ss = 6, int ms = 6, int ds = 6)
+		Student(string ns, int al = 2, int sl = 4, int ml = 2, int dl = 2, int as = 6, int ss = 6, int ms = 6, int ds = 6) // not used
 		{
 			name = ns;
 			addLevel = al;
@@ -502,12 +519,12 @@ class Student
 			int numUniqueProblems = (MAX_ADDEND + 1) * (MAX_ADDEND + 1);
 			addTemplateArr = new AddTemplate[numUniqueProblems];
 			int ndx = 0;
-			for(int l=0; l<=MAX_ADDEND;l++)
+			for(int l=0; l<=MAX_ADDEND;l++) // for the row (fa) corresponding to each level
 			{
 				int fa;
 				int sa;
 				fa = l;
-				for(sa=0;sa<=l;sa++)
+				for(sa=0;sa<=l;sa++) // fill in the row to the col for the current level
 				{
 					int s = fa + sa;
 					addTemplateArr[ndx].setFirstAddend(fa);
@@ -516,7 +533,7 @@ class Student
 					ndx++;
 				}
 				sa = l;
-				for(fa=0;fa<l;fa++)
+				for(fa=0;fa<l;fa++) // fill in the column for the current level to the current row
 				{
 					int s = fa + sa;
 					addTemplateArr[ndx].setFirstAddend(fa);
